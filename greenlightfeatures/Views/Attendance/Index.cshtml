@@ -1,0 +1,155 @@
+﻿@model IEnumerable<ELearning.Models.Dto.AttendanceDTO>
+
+@{
+    ViewBag.Title = "Index";
+    if (ViewBag.IsPDF == true)
+    {
+        Layout = "~/Views/Shared/_PDFLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Dashboard.cshtml";
+    }
+    int counter = 1;
+}
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.ClassName</h4>
+    </div>
+    <div class="panel-body" style="@(ViewBag.IsPDF == false ? "overflow:auto;height:300px;" : "")">
+        @if (ViewBag.IsPDF == false)
+        {
+            <div>
+                <table>
+                    <tr>
+                        <td>From</td>
+                        <td>@Html.TextBox("dateFrom", ((ViewBag.From as DateTime?).HasValue ? (ViewBag.From as DateTime?).Value.ToShortDateString() : ""), new { @id = "dateFrom" })</td>
+                        <td>To</td>
+                        <td>@Html.TextBox("dateTo", ((ViewBag.To as DateTime?).HasValue ? (ViewBag.To as DateTime?).Value.ToShortDateString() : ""), new { @id = "dateTo" })</td>
+                        <td><button class="btn btn-success" onclick="FilterAttendance()">Apply</button></td>
+                        <td>@Html.ActionLink("Download as PDF", "AttendancePDF", new { id = ViewBag.ID, from = ViewBag.From, to = ViewBag.To, isPDF = true }, new { @class = "btn btn-success" })</td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+        }
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Day
+                </th>
+                <th>
+                    Instructor
+                </th>
+                <th>
+                    Total Students
+                </th>
+                <th>
+                    Present Students
+                </th>
+                <th>
+                    Absent Students
+                </th>
+                <th>
+                    Taken At
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(counter++)</td>
+                    <td>
+                        @(item.Date.ToString("dd/MM/yyyy"))
+                    </td>
+                    <td>
+                        @(item.Date.ToString("dddd"))
+                    </td>
+                    <td>
+                        @if (item.Attendance != null)
+                        {
+                            if (item.Attendance.IsInstructorPresent)
+                            {
+                                <label class="label label-success">Present</label>
+                            }
+                            else
+                            {
+                                <label class="label label-danger">Absent</label>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @(item.Attendance == null ? "" : item.TotalStudents.ToString())
+                    </td>
+                    <td>
+                        @(item.Attendance == null ? "" : item.PresentStudents.ToString())
+                    </td>
+                    <td style="color:indianred">
+                        @(item.Attendance == null ? "" : (item.TotalStudents - item.PresentStudents).ToString())
+                    </td>
+                    <td>
+                        @(item.Attendance == null ? "" : item.Attendance.CreateDate.ToString("dd/MM/yyyy"))
+                    </td>
+                    @if (ViewBag.IsPDF == false)
+                    {
+                        if (User.IsInRole("Student"))
+                        {
+                            if (item.Attendance != null)
+                            {
+                                <td>
+                                    @Html.ActionLink("View", "Edit", new { date = item.Date, id = ViewBag.ID })
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    Not Taken
+                                </td>
+                            }
+                        }
+                        else if (!User.IsInRole("Management"))
+                        {
+                            if (item.Attendance != null)
+                            {
+                                <td>
+                                    @Html.ActionLink("View/Edit", "Edit", new { date = item.Date, id = ViewBag.ID })
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @Html.ActionLink("Create", "Create", new { date = item.Date, id = ViewBag.ID })
+                                </td>
+                            }
+                        }
+                    }
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="~/Scripts/jquery-ui-1.9.2.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#dateFrom').datetimepicker({ format: 'L' });
+            $('#dateTo').datetimepicker({ format: 'L' });
+        });
+        function FilterAttendance() {
+            var from = $("#dateFrom").val();
+            var to = $("#dateTo").val();
+            var id = '@ViewBag.ID';
+            window.location.href = "/Attendance/Index?id=" + id + "&from=" + from + "&to=" + to;
+        }
+    </script>
+}

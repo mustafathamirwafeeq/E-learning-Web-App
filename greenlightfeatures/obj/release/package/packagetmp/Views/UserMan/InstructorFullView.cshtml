@@ -1,0 +1,88 @@
+﻿@model ELearning.Models.AspNetUsers
+@{
+    ViewBag.Title = "ClassFullView";
+    if (ViewBag.IsPDF == true)
+    {
+        Layout = "~/Views/Shared/_PDFLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Dashboard.cshtml";
+    }
+    List<ELearning.Models.CourseClass> instructorClasses = ViewBag.InstructorClasses == null ? null : ViewBag.InstructorClasses as List<ELearning.Models.CourseClass>;
+    int counter = 1;
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title"><img class="fa" /> Instructor Full View Details</h3>
+    </div>
+    @if (Model != null)
+    {
+        <img  src="@Model.Photo" id="UploadedImages" style='@(String.IsNullOrEmpty(Model.Photo) ? "display:none" : "width:225;height:175px; float:right;margin-bottom:20px;margin-top:30px;margin-right:25px;")' class="img-responsive img-profile" />
+    }
+    @if (ViewBag.IsPDF == false)
+    {
+        <div id="divListBox" class="panel-body">
+            <label>Please select instructor from following list</label><br />
+            @Html.ListBox("Instructors", null, new { @onChange = "LoadFullInstructorView()", @id = "lstInstructor", @style = "width:50%" })
+        </div>
+        if (ViewBag.ID != 0)
+        {
+            @Html.ActionLink("Download as PDF", "InstructorFullViewPDF", new { id = ViewBag.ID }, new { @class = "btn btn-success" })
+        }
+    }
+    <br />
+    <br />
+    <label>Instructor Full Details</label><br />
+    @if (Model != null)
+    {
+        <table class="table table-bordered" style="width:100%;">
+            <tr>
+                <th>Instructor Name</th>
+                <td>@Model.FullName</td>
+                <th>Email</th>
+                <td>@Model.Email</td>
+                <th>Address</th>
+                <td>@Model.Address</td>
+            </tr>
+            <tr>
+                <th>List of Classes Assigned</th>
+                <td>@instructorClasses.Count</td>
+                <th>Phone</th>
+                <td>@Model.PhoneNumber</td>
+                <th>Date of Birth</th>
+                <td>@(Model.DateOfBirth.HasValue ? Model.DateOfBirth.Value.ToString("dd/MM/yyyy") : "")</td>
+            </tr>
+        </table>
+        <label>Instructor CV:</label> <a href="~/CVs/@Model.CVPath">@Model.CVPath</a>
+        <table class="table table-responsive" style="margin-top:10px;">
+            <tr>
+                <th>#</th>
+                <th>Class Name</th>
+                <th>Duration</th>
+                <th>Base</th>
+            </tr>
+            <tr>
+                @foreach (var cls in instructorClasses)
+                {
+                <tr>
+                    <td>@(counter++)</td>
+                    <td>
+                        @Html.ActionLink(cls.Title, "ClassFullView", new { id = cls.Id })
+                    </td>
+                    <td>@(cls.StartDate.ToString("dd/MM/yyyy") + " to " + cls.EndDate.ToString("dd/MM/yyyy"))</td>
+                    <td>
+                        @Html.ActionLink(cls.TrainingBase.Name, "BaseFullView", new { id = cls.TrainingBaseId })
+                    </td>
+                </tr>
+                }
+            </table>
+    }
+    <script type="text/javascript">
+        function LoadFullInstructorView() {
+            var val = $('#lstInstructor').val();
+            window.location.href = "/UserMan/InstructorFullView?id=" + val;
+        }
+    </script>
+</div>

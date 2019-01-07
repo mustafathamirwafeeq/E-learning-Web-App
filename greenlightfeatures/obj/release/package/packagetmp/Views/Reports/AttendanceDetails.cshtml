@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "ClassSchedule";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>Select Class for Attendance Details</h4>
+    </div>
+    <div class="panel panel-body">
+        <label>Class</label>
+        @Html.DropDownList("ClassId", (SelectList)ViewBag.CourseClasses)
+        <button class="btn btn-success" onclick="GoToAttendanceDetails()">GO</button>
+    </div>
+</div>
+<script type="text/javascript">
+    var urlAttendanceDetails = '@Url.Action("Index","Attendance")';
+    function GoToAttendanceDetails() {
+        var id = $("#ClassId").val();
+        if (id == null || id == '' || id == undefined) {
+            alert('Please select class first.');
+        }
+        else {
+            window.location.href = urlAttendanceDetails + "?id=" + id;
+        }
+    }
+</script>

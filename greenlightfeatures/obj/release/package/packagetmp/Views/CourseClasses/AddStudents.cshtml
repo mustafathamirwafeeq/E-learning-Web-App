@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "Manage Class Students";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/bootstrap-duallistbox.css" rel="stylesheet" />
+}
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+
+        <div id="SuccessAlert" class="alert alert-success" role="alert" style="display: none;"><span class="">Sucess</span></div>
+
+        @using (Html.BeginForm())
+        {
+            <div class="form-horizontal">
+                <input type="hidden" id="id" name="id" value="@ViewBag.ID" />
+                <dl class="dl-horizontal">
+                    <dt>
+                        Class/Course
+                    </dt>
+                    <dd>
+                        @ViewBag.Title
+                    </dd>
+                    <dt>
+                        Instructor
+                    </dt>
+                    <dd>
+                        @ViewBag.Instructor
+                    </dd>
+                    <dt>
+                        Filter
+                    </dt>
+                    <dd>
+                        All inactive students have Brackets([ ]) around
+                    </dd>
+                </dl>
+
+                <div style="margin-left:100px;margin-top:10px;margin-bottom:10px;">
+                    @if (ViewBag.IsInactive)
+                    {
+                        <input type="checkbox" id="isInactive" name="isInactive" checked="checked"/>
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="isInactive" name="isInactive" />
+                    }
+                    <label style="margin-left:5px;">Show Inactive Students</label>
+                    <button class="btn btn-success" onclick="RefreshStuents()">Refresh</button>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-1 col-md-11 " id="addStudentContainer">
+                        @Html.ListBox("Students", null, htmlAttributes: new { @class = "form-control" })
+
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top:100px;">
+                    <div class="col-md-offset-1 col-md-11">
+                        <input type="button" value="Update" class="btn btn-primary save" />
+                        @Html.ActionLink("Back to Classes", "Index", "CourseClasses")
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts {
+
+    <script src="~/Scripts/jquery.bootstrap-duallistbox.min.js"></script>
+    <script type="text/javascript">
+        function RefreshStuents()
+        {
+            var val = $('#isInactive').is(":checked");
+            window.location.href = "/CourseClasses/AddStudents?id=" + '@ViewBag.ID' + "&isInactive=" + val;
+        }
+        $(function () {
+
+            var p = [@foreach(var s in ViewBag.AddedStudents){@(s.UserId) @Html.Raw(",")}];
+
+            var questions = $('select[name="Students"]');
+            $("#Students option").each(function () {
+                if ($.inArray(parseInt(this.value, 0), p) != -1) {
+                    $(this).attr("selected", "selected");
+                }
+            });
+            questions.bootstrapDualListbox({
+                showFilterInputs: false,
+                nonSelectedListLabel: 'All Students',
+                selectedListLabel: 'Selected Students',
+
+            });
+
+            $('.save').click(function () {
+                var q = $('[name="Students"]').val();
+
+                var url = "/CourseClasses/SaveStudents?id=" + @ViewBag.ID + "&studentIds=" + q;
+                $.ajax({
+                    url: url, async: false, dataType: 'json', success: function (result) {
+                        if (result.status == 0) {
+                            ShowSuccessMessage(result.data)
+                        }
+                    }
+                });
+            });
+        });
+
+        function ShowSuccessMessage(msg) {
+            $("#SuccessAlert").html(msg);
+            $("#SuccessAlert").show();
+            setTimeout(function () {
+                $('#SuccessAlert').hide();
+            }, 2000);
+        }
+
+    </script>
+}
+

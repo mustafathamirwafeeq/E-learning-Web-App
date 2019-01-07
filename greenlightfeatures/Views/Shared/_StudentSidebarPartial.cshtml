@@ -1,0 +1,16 @@
+﻿@model ELearning.Models.CourseClass
+
+<ul class="nav navbar-nav side-nav side-nav-inside">
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#Material"><i class="fa fa-caret-square-o-down"></i> Material <i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="Material" class="collapse">
+            @foreach (var a in Model.Attachment.OrderByDescending(ao => ao.Order))
+            {
+                <li>
+                    <a href="@a.FilePath" target="_blank">@a.Title</a>
+                </li>
+            }
+        </ul>
+    </li>
+    @*<li><a href="/CourseClasses/FinishCourse/?id=@Model.Id"><i class="fa fa-file"></i> Finish </a></li>*@
+</ul>

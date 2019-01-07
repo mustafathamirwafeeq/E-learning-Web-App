@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ELearning.Models.Dto.BaseDetail>
+
+@{
+    ViewBag.Title = "Bases Statistics";
+    if (ViewBag.IsPDF == true)
+    {
+        Layout = "~/Views/Shared/_PDFLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Dashboard.cshtml";
+    }
+    int counter = 1;
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+        @if (ViewBag.IsPDF == false)
+        {
+            @Html.ActionLink("Download as PDF", "BaseHistoryPDF", new { }, new { @class = "btn btn-success" })
+        }
+        <br />
+        <br />
+
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+                    Total Classes
+                </th>
+                <th>
+                    Completed Classes
+                </th>
+                <th>
+                    Live Classes
+                </th>
+                <th>
+                    Total Students
+                </th>
+                <th>
+                    Live Students
+                </th>
+                <th>
+                    Total Instructors
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(counter++)</td>
+                    <td>
+                        @item.Base.Name
+                    </td>
+                    <td>
+                        @item.Base.Address
+                    </td>
+                    <td>
+                        @item.ClassesInitiated.Count
+                    </td>
+                    <td>
+                        @item.ClassesCompleted.Count
+                    </td>
+                    <td>
+                        @item.ClassesLive.Count
+                    </td>
+                    <td>
+                        @item.LiveStudents
+                    </td>
+                    <td>
+                        @item.TotalStudents
+                    </td>
+                    <td>
+                        @item.TotalInstructors
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+</script>

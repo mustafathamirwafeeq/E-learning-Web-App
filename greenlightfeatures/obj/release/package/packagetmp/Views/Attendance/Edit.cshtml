@@ -1,0 +1,99 @@
+﻿@model ELearning.Models.Attendance
+@{
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/bootstrap-duallistbox.css" rel="stylesheet" />
+}
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+
+        <div id="SuccessAlert" class="alert alert-success" role="alert" style="display: none;"><span class="">Sucess</span></div>
+
+        @using (Html.BeginForm())
+        {
+            <div class="form-horizontal">
+                <input type="hidden" id="id" name="id" value="@ViewBag.ID" />
+                @if (ELearning.Models.Utilities.IsInstructorAttendanceAuthorized())
+                {
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Is Instructor Present?</label>
+                        <div class="col-md-10">
+                            <input type="checkbox" id="IsInstructorPresent" @(Model.IsInstructorPresent ? "checked=checked" : "")>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    @Html.CheckBox("IsInstructorPresent", Model.IsInstructorPresent, new { @style="display:none"})
+                }
+                <div class="form-group">
+                    <div class="col-md-offset-1 col-md-11 ">
+                        @Html.ListBox("Students", null, htmlAttributes: new { @class = "form-control" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-1 col-md-11">
+                        @if (!User.IsInRole("Student"))
+                        {
+                            <input type="button" value="Update" class="btn btn-primary save" />
+                        }
+                        @Html.ActionLink("Back to Attendances", "Index", "Attendance", new { id = @ViewBag.ClassID }, null)
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts {
+
+    <script src="~/Scripts/jquery.bootstrap-duallistbox.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            var p = [@foreach(var s in ViewBag.AddedStudents){@(s.UserId) @Html.Raw(",")}];
+
+            var questions = $('select[name="Students"]');
+            $("#Students option").each(function () {
+                if ($.inArray(parseInt(this.value, 0), p) != -1) {
+                    $(this).attr("selected", "selected");
+                }
+            });
+            questions.bootstrapDualListbox({
+                showFilterInputs: false,
+                nonSelectedListLabel: 'Absent Students',
+                selectedListLabel: 'Present Students',
+
+            });
+
+            $('.save').click(function () {
+                var q = $('[name="Students"]').val();
+                var isChecked = $("#IsInstructorPresent").is(':checked');
+                var url = "/Attendance/SaveAttendance?id=" + @ViewBag.ID + "&studentIds=" + q + "&IsInstructorPresent=" + isChecked;;
+                $.ajax({
+                    url: url, async: false, dataType: 'json', success: function (result) {
+                        if (result.status == 0) {
+                            ShowSuccessMessage(result.data)
+                        }
+                    }
+                });
+            });
+        });
+
+        function ShowSuccessMessage(msg) {
+            $("#SuccessAlert").html(msg);
+            $("#SuccessAlert").show();
+            setTimeout(function () {
+                $('#SuccessAlert').hide();
+            }, 2000);
+        }
+
+    </script>
+}
+

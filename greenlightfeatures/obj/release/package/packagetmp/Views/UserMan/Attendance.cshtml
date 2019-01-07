@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Attendance";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>Attendance Statistics</h4>
+    </div>
+    <div class="panel-body" style="overflow:auto;height:300px;">
+        <div>
+            <table>
+                <tr>
+                    <td>Class</td>
+                    <td>
+                        @Html.DropDownList("CourseClassId", (SelectList)ViewBag.CourseList, "Select Class", new {@id="CourseClassId", @class = "form-control" })
+                    </td>
+                    <td>From</td>
+                    <td>@Html.TextBox("dateFrom", null, new { @id = "dateFrom" })</td>
+                    <td>To</td>
+                    <td>@Html.TextBox("dateTo", null, new { @id = "dateTo" })</td>
+                    <td><button class="btn btn-success" onclick="FilterAttendance()">Show</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="~/Scripts/jquery-ui-1.9.2.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#dateFrom').datetimepicker({ format: 'L' });
+            $('#dateTo').datetimepicker({ format: 'L' });
+        });
+        function FilterAttendance() {
+            var from = $("#dateFrom").val();
+            var to = $("#dateTo").val();
+            var id = $("#CourseClassId").val();
+            if (id == null || id == undefined || id == '')
+            {
+                alert('Please select class first');
+                return;
+            }
+            window.location.href = "/Attendance/Index?id=" + id + "&from=" + from + "&to=" + to;
+        }
+    </script>
+}

@@ -1,0 +1,110 @@
+﻿@model ELearning.Models.CourseClass
+@{
+    ViewBag.Title = "ClassFullView";
+    if (ViewBag.IsPDF == true)
+    {
+        Layout = "~/Views/Shared/_PDFLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Dashboard.cshtml";
+    }
+    ELearning.Models.AspNetUsers instructor = ViewBag.Instructor as ELearning.Models.AspNetUsers;
+    List<ELearning.Models.Dto.StudentClassDetail> StudentDetails = ViewBag.StudentDetails as List<ELearning.Models.Dto.StudentClassDetail>;
+    int studentDetailCounter = 0;
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title"><img class="fa" /> Class Full View Details</h3>
+    </div>
+    @if (instructor != null)
+    {
+        <img src="@instructor.Photo" id="UploadedImages" style='@(String.IsNullOrEmpty(instructor.Photo) ? "display:none" : "width:175px;height:225px; float:right;margin-bottom:20px;margin-top:30px;margin-right:25px;")' class="img-responsive img-profile" />
+    }
+    @if (ViewBag.IsPDF == false)
+    {
+        <div id="divListBox" class="panel-body">
+            <label>Please select class from following list</label><br />
+            @Html.ListBox("Classes", null, new { @onChange = "LoadFullClassView()", @id = "lstClass", @style = "width:50%" })
+        </div>
+        if (ViewBag.ID != 0)
+        {
+            @Html.ActionLink("Download as PDF", "ClassFullViewPDF", new { id = ViewBag.ID }, new { @class = "btn btn-success" })
+        }
+    }
+    <br />
+    <br />
+
+    <label>Class Full Details</label><br />
+    @if (Model != null)
+    {<table class="table table-bordered">
+        <tr>
+            <th style="width:25%;"></th>
+            <th style="width:75%;"></th>
+        </tr>
+        <tr>
+            <td><label>Class Name</label></td>
+            <td>@Model.Title</td>
+        </tr>
+        <tr>
+            <td><label>Duration</label></td>
+            <td>@(Model.StartDate.ToShortDateString() + " to " + Model.EndDate.ToShortDateString())</td>
+        </tr>
+        <tr>
+            <td><label>Total No of Class Days</label></td>
+            <td>@(string.IsNullOrEmpty(Model.ClassDates) ? 0 : Model.ClassDates.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Count())</td>
+        </tr>
+        <tr>
+            <td><label>Instructor</label></td>
+            <td>
+                @Html.ActionLink(instructor.FullName, "InstructorFullView", new { id = instructor.UserId })
+                ,  CV: <a href="~/CVs/@instructor.CVPath">@instructor.CVPath</a>
+            </td>
+        </tr>
+        <tr><td></td><td></td></tr>
+    </table>
+        <label style="margin-top:10px;margin-bottom:5px;">List of Students enrolled for this course/class</label>
+        <table class="table table-responsive">
+            <tr>
+                <th>S.No</th>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Presents</th>
+                <th>Absents</th>
+                <th>Attendance AVG %</th>
+                <th>Overall Evaluation Marks %</th>
+                <th></th>
+            </tr>
+            <tr>
+                @foreach (var studentDetail in StudentDetails)
+                {
+                    studentDetailCounter++;
+                <tr>
+                    <td>@studentDetailCounter</td>
+                    <td>@studentDetail.Student.UserName</td>
+                    <td>@studentDetail.Student.FullName</td>
+                    <td>@(studentDetail.Presents.ToString() + "/" + studentDetail.Total.ToString())</td>
+                    <td>@(studentDetail.Absents.ToString() + "/" + studentDetail.Total.ToString())</td>
+                    <td>@((double.Parse((double.Parse(studentDetail.Presents.ToString()) / double.Parse(studentDetail.Total.ToString())).ToString()) * 100).ToString("0"))</td>
+                    <td>@(studentDetail.OverAllEvaluationMarks.ToString("0.00"))</td>
+                    <td>
+                        @Html.ActionLink("Exam/Student Details", "ExamFullDetails", new { sid = studentDetail.Student.UserId, cid = studentDetail.Class.Id })
+                    </td>
+                </tr>
+                }
+            </table>
+            <div id="divFullViewData" style="margin-top:20px;">
+                @if (ViewBag.ID != 0)
+                {
+                    { Html.RenderAction("BarChartForClassEvaluation", "UserMan", new { clsId = Model.Id }); }
+                }
+            </div>
+    }
+    <script type="text/javascript">
+        function LoadFullClassView() {
+            var val = $('#lstClass').val();
+            window.location.href = "/UserMan/ClassFullView?id=" + val;
+        }
+    </script>
+</div>

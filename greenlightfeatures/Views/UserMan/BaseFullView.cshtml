@@ -1,0 +1,108 @@
+﻿@model ELearning.Models.Dto.BaseDetail
+@{
+    ViewBag.Title = "BaseFullView";
+    if (ViewBag.IsPDF == true)
+    {
+        Layout = "~/Views/Shared/_PDFLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Dashboard.cshtml";
+    }
+    int counter = 1;
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title"><img class="fa" /> Base Full View Details</h3>
+    </div>
+    @if (ViewBag.IsPDF == false)
+    {
+        <div id="divListBox" class="panel-body">
+            <label>Please select base from following list</label><br />
+            @Html.ListBox("Bases", null, new { @onChange = "LoadFBaseullView()", @id = "lstBase", @style = "width:50%" })
+        </div>
+        @Html.ActionLink("Download as PDF", "BaseFullViewPDF", new { id = ViewBag.ID }, new { @class = "btn btn-success", @style = "" })
+    }
+    <br />
+    <br />  
+    <label>Base Full Details</label><br />
+
+    <table class="table table-bordered">
+        <tr>
+            <th style="width:25%;"></th>
+            <th style="width:75%;"></th>
+        </tr>
+        <tr>
+            <td><label>Name</label></td>
+            <td>@Model.Base.Name</td>
+        </tr>
+        <tr>
+            <td><label>Description</label></td>
+            <td>@Model.Base.Description</td>
+        </tr>
+        <tr>
+            <td><label>Active Classes</label></td>
+            <td>@Model.ClassesLive.Count</td>
+        </tr>
+        <tr>
+            <td><label>Total No of Classes Completed So far </label></td>
+            <td>@Model.ClassesCompleted.Count</td>
+        </tr>
+        <tr>
+            <td><label>Live Classes</label></td>
+            <td>
+                <table class="table">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Students</th>
+                        <th>Total Class Days</th>
+                        <th>Completed Class Days</th>
+                        <th>Remaining Class Days</th>
+                    </tr>
+                    @foreach (var item in Model.ClassesLive)
+                    {
+                        <tr>
+                            <td>@(counter++)</td>
+                            <td>@Html.ActionLink(item.Title, "ClassFullView", new { id = item.Id })</td>
+                            <td>@(string.IsNullOrEmpty(item.StudentIds) ? 0 : item.StudentIds.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Count())</td>
+                            @{
+                        List<DateTime> existingDates = new List<DateTime>();
+                        if (item.ClassDates != null)
+                        {
+                            existingDates = item.ClassDates.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => string.IsNullOrEmpty(x) ? DateTime.MinValue : DateTime.Parse(x)).ToList();
+                        }
+                        int totalDays = existingDates.Count;
+                        int completedDays = existingDates.Where(x => x < DateTime.Now).Count();
+                        int remainingDays = existingDates.Where(x => x > DateTime.Now).Count();
+                            }
+                            <td>@totalDays</td>
+                            <td>@completedDays</td>
+                            <td>@remainingDays</td>
+                        </tr>
+                    }
+                </table>
+            </td>
+        </tr>
+        <tr><td></td><td></td></tr>
+    </table>
+    <div id="divFullViewClassData">
+        @if (ViewBag.ID != 0)
+        {
+            { Html.RenderAction("BarChartForClassDetails", "UserMan", new { id = ViewBag.ID }); }
+        }
+    </div>
+    <div id="divFullViewData">
+        @if (ViewBag.ID != 0)
+        {
+            { Html.RenderAction("BarChartForBase", "UserMan", new { id = ViewBag.ID, model = Model }); }
+        }
+    </div>
+    <script type="text/javascript">
+        function LoadFBaseullView() {
+            var val = $('#lstBase').val();
+            window.location.href = "/UserMan/BaseFullView?id=" + val;
+        }
+    </script>
+</div>

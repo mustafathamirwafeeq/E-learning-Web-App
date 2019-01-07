@@ -1,0 +1,67 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        @if (ViewBag.IsPDF == false)
+        {
+            <div class="col-lg-2">
+                @Html.Partial("_UserManSidebarPartial")
+            </div>
+        }
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><img class="fa" /> Statistics</h3>
+                        </div>
+                        <div id="stats" class="panel-body">
+                            @{
+                                List<string> stats = ELearning.Models.Utilities.GetInstance().GetStatistics();
+                            }
+                            @if (ViewBag.IsPDF == false)
+                            {
+                                <label style="font-size:20px;display: block;" class="label label-primary">Bases: @stats[0]</label>
+                                <label style="font-size:20px;display: block;" class="label label-info">Classes: @stats[1]</label>
+                                <label style="font-size:20px;display: block;" class="label label-warning">Instructors: @stats[2]</label>
+                                <label style="font-size:20px;display: block;" class="label label-success">Students: @stats[3]</label>
+                            }
+                            else
+                            {
+                                <label style="font-size:20px;display: block;" class="">Bases: @stats[0]</label>
+                                <label style="font-size:20px;display: block;" class="">Classes: @stats[1]</label>
+                                <label style="font-size:20px;display: block;" class="">Instructors: @stats[2]</label>
+                                <label style="font-size:20px;display: block;" class="">Students: @stats[3]</label>
+                            }
+
+                        </div>
+                    </div>
+                    @if (ViewBag.IsPDF == false)
+                    {
+                        @Html.ActionLink("Download Dashboard as PDF", "UserManDashboardPDF", "Home", new { isPDF = true }, new { @class = "btn btn-success" })
+                    }
+                </div>
+                <div class="col-lg-9">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-check"></i> Classes/Students Details(Bar Chart)</h3>
+                        </div>
+                        <div class="panel-body">
+                            @{Html.RenderAction("BarChart", "UserMan");}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:-50px;">
+                <div class="col-lg-12">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-check"></i> Current Students in Live Classes (Line Chart)</h3>
+                        </div>
+                        <div class="panel-body">
+                            @{Html.RenderAction("LineChart", "UserMan");}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

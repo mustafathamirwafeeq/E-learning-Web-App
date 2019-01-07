@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ELearning.Models.CourseClass>
+<table class="table">
+    <tr>
+        <th>Base</th>
+        <th>Course</th>
+        <th>Instructor</th>
+        <th>Students</th>
+        <th>Added On</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.TrainingBase.Name
+            </td>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @(ELearning.Models.Utilities.GetInstance().GetUserFullName(item.InstructorId))
+            </td>
+            <td>
+                <a href="#" onclick="ShowStudents(@item.Id)">@(item.StudentIds.Split(new string[]{","},StringSplitOptions.RemoveEmptyEntries).Count())</a>
+            </td>
+            <td>
+                @item.AddedDate.ToString()
+            </td>
+        </tr>
+    }
+</table>
+<div id="dialog" title="Basic dialog">
+</div>
+<script>
+    function ShowStudents(id)
+    {
+        //Do ajax call  
+        $.ajax({
+            type: 'GET',
+            url: "@Url.Content("/CourseClasses/GetStudentNames/")",    
+            data : {                          
+                id:id//Data need to pass as parameter                       
+            },           
+            dataType: 'html', //dataType - html
+            success:function(result)
+            {
+                //Create a Div around the Partial View and fill the result
+                $('#dialog').html(result);                 
+            }
+        });
+
+        $("#dialog").dialog("open");
+    }
+    $(function () {
+        $("#dialog").dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "explode",
+                duration: 1000
+            }
+        });
+    });
+</script>

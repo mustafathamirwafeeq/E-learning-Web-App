@@ -1,0 +1,12 @@
+﻿@{
+    string role = ELearning.Models.Utilities.GetCurrentUserRole();   
+}
+
+@if (role.Equals("Admin"))
+{ 
+    @Html.Partial("_AdminSidebarPartial")
+}
+else if (role.Equals("Moderator"))
+{
+    @Html.Partial("_ModeratorSidebarPartial")
+}

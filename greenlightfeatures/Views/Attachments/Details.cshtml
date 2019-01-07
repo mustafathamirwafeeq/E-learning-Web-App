@@ -1,0 +1,59 @@
+﻿@model ELearning.Models.Attachment
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Attachment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FilePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FilePath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PubDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PubDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cours.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cours.Title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "LineChart";
+    Layout = null;
+}
+<script src="~/Scripts/jsAPI.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart', 'line']}]}"></script>
+<div id="LineChart" style="height: 400px;"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        drawLineChart();
+        function drawLineChart() {
+
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                url: '/UserMan/GetLineChartData',
+                dataType: "json",
+                success: function (lineChartData) {
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Base-Class');
+                    data.addColumn('number', 'Students');
+                    $.each(lineChartData, function (i, d) {
+                        data.addRow([lineChartData[i].Label, lineChartData[i].Value1]);
+                    });
+                    var options = {
+                        chart: {
+                            title: 'Classes/Students Current Status',
+                            subtitle: 'Enrolled Students in Current/Live Classes'
+                        },
+                        hAxis: {
+                            title: 'Base-Class'
+                        },
+                        vAxis: {
+                            title: 'Number of Students'
+                        },
+                        colors: ['#AB0D06', '#007329'],
+                        trendlines: {
+                            0: { type: 'exponential', color: '#333', opacity: 1 },
+                            1: { type: 'linear', color: '#111', opacity: .3 }
+                        }
+                    };
+                    var chart = new google.visualization.LineChart(document.getElementById('LineChart'));
+                    chart.draw(data, options);
+                },
+                error: function (data) {
+                    alert("Error In getting Records");
+                }
+            });
+        }
+    });
+</script>

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ELearning.Models.Dto.ExamFullView>
+@{
+    ViewBag.Title = "ExamFullDetails";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+    ELearning.Models.AspNetUsers Student = ViewBag.Student as ELearning.Models.AspNetUsers;
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title"><img class="fa" /> Students Full View Details</h3>
+    </div>
+    <div id="divListBox" class="panel-body">
+        @if (Model != null && Model.Count() > 0)
+        {
+            <div style="width:20%;height:200px; float:right;margin-bottom:20px;">
+                <img src="@Student.Photo" id="UploadedImages" style='@(String.IsNullOrEmpty(Student.Photo) ? "display:none" : "")' class="img-responsive img-profile" />
+            </div>
+            <table class="table table-bordered" style="width:78%;float:left;">
+                <tr>
+                    <th>Student Name</th>
+                    <td>@Student.FullName</td>
+                    <th>Email</th>
+                    <td>@Student.Email</td>
+                    <th>Address</th>
+                    <td>@Student.Address</td>
+                </tr>
+                <tr>
+                    <th>Class Name</th>
+                    <td>@Html.ActionLink(@Model.First().Exam.CourseClass.Title, "ClassFullView", new { id = @Model.First().Exam.CourseClass.Id })</td>
+                    <th>Phone</th>
+                    <td>@Student.PhoneNumber</td>
+                    <th>Date of Birth</th>
+                    <td>@Student.DateOfBirth</td>
+                </tr>
+            </table>
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>Exam</th>
+                    @foreach (var evalType in ViewBag.EvalTypes)
+                    {
+                        <th>@evalType.Name</th>
+                    }
+                    <th>Average %</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(item.Exam.Title)</td>
+                        @foreach (var eval in item.Evals)
+                        {
+                            <td>@(eval.Grade)</td>
+                        }
+                        <td>@(item.Evals.Select(x => double.Parse(x.Grade)).Average())</td>
+                    </tr>
+                }
+            </table>
+            <label style="margin-top:20px;">Student Exams Evaluations</label>
+            <div id="divFullViewData">
+                @if (ViewBag.ID != 0)
+                {
+                    { Html.RenderAction("LineChartForExamEvaluation", "UserMan", new { cid = Model.First().Exam.CourseClassId, sid = Student.UserId }); }
+                }
+            </div>
+            <label style="margin-top:20px;">Student Attendance Details</label>
+            <div id="divFullViewDataAttendance">
+                @if (ViewBag.ID != 0)
+                {
+                    { Html.RenderAction("PieChartForExamEvaluation", "UserMan", new { cid = Model.First().Exam.CourseClassId, sid = Student.UserId }); }
+                }
+            </div>
+        }
+    </div>
+</div>

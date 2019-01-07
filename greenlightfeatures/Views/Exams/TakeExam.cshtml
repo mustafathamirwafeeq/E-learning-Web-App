@@ -1,0 +1,358 @@
+﻿@model ELearning.Models.Exam
+
+@{
+    ViewBag.Title = Model.CourseClass.Title + " - Take Exam";
+    Layout = "~/Views/Shared/_DashboardUser.cshtml";
+
+    string questionid;
+    string answerid;
+
+    string op1;
+    string op2;
+    string op3;
+    string op4;
+    int correctOption;
+    string correctAnswer;
+    int totalQuestion = Model.ExamQuestion.Count;
+    int cnt = 0;
+
+    var questionList = Model.ExamQuestion.OrderBy(x => Guid.NewGuid()).ToList();
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h4>@ViewBag.Title</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            @{ Html.RenderAction("CourseLeftBar", "CourseClasses", new { id = Model.CourseClassId }); }
+                        </div>
+                        <div class="col-md-9">
+                            <div class="alert alert-success alert-dismissible" role="alert" style="display: none;">
+                                <span id="alert-message">Sucess</span>
+                            </div>
+                            <form name="myquiz" id="myquiz">
+                                <div class="form-horizontal">
+                                    <input type="hidden" id="ExamId" name="ExamId" value="@Model.Id" />
+                                    <input type="hidden" id="StudentId" name="StudentId" value="@ELearning.Models.Utilities.GetInstance().GetCurrentUserId()" />
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            Exam
+                                        </dt>
+                                        <dd>
+                                            @Model.Title
+                                        </dd>
+                                        <dt>
+                                            Exam Type
+                                        </dt>
+                                        <dd>
+                                            @Model.ExamType.Type
+                                        </dd>
+                                        <dt>
+                                            Class
+                                        </dt>
+                                        <dd>
+                                            @Model.CourseClass.Title
+                                        </dd>
+                                    </dl>
+                                    <div>
+                                        <ol class="list-unstyled mcq-questions">
+                                            @foreach (var q in questionList)
+                                            {
+                                                cnt++;
+                                                questionid = "answer" + cnt;
+                                                answerid = "question" + cnt;
+
+                                                op1 = q.Question.Option1;
+                                                op2 = q.Question.Option2;
+                                                op3 = q.Question.Option3;
+                                                op4 = q.Question.Option4;
+
+                                                correctOption = q.Question.CorrectAnswer;
+                                                correctAnswer = q.Question.AnswerData;
+
+                                                <li>
+                                                    <p>Q @cnt - @q.Question.QuestionText?</p>
+                                                    <ul>
+                                                        <li class="radio">
+                                                            <label >
+                                                                <input type="radio" name="@answerid" id="@answerid" value="1">
+                                                                <span>@op1</span>
+                                                            </label>
+                                                        </li>
+                                                        <li class="radio">
+                                                            <label>
+                                                                <input type="radio" name="@answerid" id="@answerid" value="2">
+                                                                <span>@op2</span>
+                                                            </label>
+                                                        </li>
+                                                        @if (!string.IsNullOrEmpty(op3))
+                                                        {
+                                                            <li class="radio">
+                                                                <label>
+                                                                    <input type="radio" name="@answerid" id="@answerid" value="3">
+                                                                    <span>@op3</span>
+                                                                </label>
+                                                            </li>
+                                                        }
+                                                        @if (!string.IsNullOrEmpty(op4))
+                                                        {
+                                                            <li class="radio">
+                                                                <label >
+                                                                    <input type="radio" name="@answerid" id="@answerid" value="4">
+                                                                    <span>@op4</span>
+                                                                </label>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                    <input type="hidden" id="@questionid" value="@correctOption" />
+                                                </li>
+                                            }
+                                        </ol>
+
+                                        <input type="button" value="Submit" class="btn btn-success save" />
+                                        <a href="javascript:void(0)" onclick="ExitExam('@Model.CourseClassId')">Back to course</a>
+                                    </div>
+                                </div>
+                            </form>
+                            <div id="quizResult" style="display:none">
+                                <h4>Result</h4>
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        Exam
+                                    </dt>
+                                    <dd>
+                                        @Model.Title
+                                    </dd>
+                                    <dt>
+                                        Exam Type
+                                    </dt>
+                                    <dd>
+                                        @Model.ExamType.Type
+                                    </dd>
+                                    <dt>
+                                        Course
+                                    </dt>
+                                    <dd>
+                                        @Model.CourseClass.Title
+                                    </dd>
+                                    <dt>Result</dt>
+                                    <dd><span id="result-description"></span></dd>
+                                </dl>
+                                <div class="panel panel-info">
+                                    <div class="panel-body">
+                                        <table class="table table-bordered table-hover table-striped tablesorter">
+                                            <tr>
+                                                <th>
+                                                    Question
+                                                </th>
+                                                <th>
+                                                    Correct Option
+                                                </th>
+                                            </tr>
+
+                                            @{
+                                                cnt = 0;
+                                                string resultId1;
+                                                string resultId2;
+                                                foreach (var q in questionList)
+                                                {
+                                                    cnt++;
+                                                    correctOption = q.Question.CorrectAnswer;
+                                                    correctAnswer = q.Question.AnswerData;
+                                                    resultId1 = "qac" + cnt;
+                                                    resultId2 = "qaw" + cnt;
+
+                                                <tr>
+                                                    <td>Q @cnt - @q.Question.QuestionText?</td>
+                                                    <td>
+                                                        <div id="@resultId1" style="display:none">
+                                                            @*@(correctOption == 0 ? @correctAnswer : correctOption.ToString())*@
+                                                            <span class="text-success">Correct</span>
+                                                            <p><span class="text-muted">Answer: </span>@ELearning.Repo.QuestionRepo.CorrectAnswer(q.Question.Id, correctOption)</p>
+                                                        </div>
+                                                        <div id="@resultId2" style="display:none">
+                                                            <span class="text-danger">Wrong</span>
+                                                            <p><span class="text-muted">Answer: </span>@ELearning.Repo.QuestionRepo.CorrectAnswer(q.Question.Id, correctOption)</p>
+                                                            <p><span class="text-muted">Answer Data: </span>@correctAnswer</p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                }
+                                            }
+                                        </table>
+
+                                        <a href="javascript:void(0)" onclick="ExitExam('@Model.CourseClassId')">Back to course</a>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/Scripts/my-script.js"></script>
+    <script type="text/javascript">
+
+        var totalquestions = 0;
+        var actualchoices = new Array();
+        var correctchoices = new Array();
+        var grade = 0;
+        var incorrect = null
+        var examDuration = '@Model.Duration'
+        var duration = (examDuration* 60000);
+
+        var startTimeMS = 0;
+        var timerCount;
+        var timerSubmit;
+        var currentTime = new Date();
+
+        $(function () {
+
+            totalquestions = '@totalQuestion';
+
+            $('.save').click(function () {
+
+                window.clearInterval(timerCount);
+                window.clearInterval(timerSubmit);
+
+                $(".alert").hide();
+
+                // get answered question
+                gradeit();
+                var evaluations = {
+                    ExamId: $('#ExamId').val(),
+                    StudentId: $('#StudentId').val(),
+                    Grade: grade + "%",
+                    ExamDate: new Date()
+                };
+                $.ajax({
+                    url: '/api/Evaluations',
+                    type: 'POST',
+                    data: JSON.stringify(evaluations),
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        ShowSuccessMessage("Exam has been successfully submited")
+                    },
+                    error: function (x, y, z) {
+                        alert(x + '\n' + y + '\n' + z);
+                    }
+                });
+
+                // show result
+                $("#myquiz").hide();
+
+                $("#quizResult").show();
+                ShowOptions();
+            });
+
+            startTimeMS = currentTime.getTime(); // currentTime.setSeconds(currentTime.getSeconds() + 3);
+            timerSubmit = setTimeout(function () { $(".save").trigger("click"); }, duration);
+            timerCount = setInterval(ShowIntimation, 1000);
+        });
+
+        function ShowIntimation(){
+            var rtime = getRemainingTime();
+            //if (rtime < 60000)
+            //{
+            $("#alert-message").html("Time left: " + convertMillisecondsToDigitalClock(rtime));
+            $(".alert").show();
+            //}
+        }
+        function getRemainingTime(){
+            return  duration - ( (new Date()).getTime() - startTimeMS );
+        }
+
+        function gradeit() {
+
+            var correctChoice;
+            var temp = '';
+            for (q = 1; q <= totalquestions; q++) {
+                var thequestion = eval("document.myquiz.question" + q);
+                for (c = 0; c < thequestion.length; c++) {
+                    if (thequestion[c].checked == true)
+                    {
+                    actualchoices[q] = thequestion[c].value;
+                    }
+                }
+                correctChoice = $("#answer" + q).val();
+                if (actualchoices[q] != correctChoice) { //process an incorrect choice
+                    if (incorrect == null)
+                        incorrect = q + "/";
+                    else
+                        incorrect += q + "/";
+                }
+                else {
+                    correctchoices[q] = correctChoice;
+                }
+            }
+
+            var _incorrect = new Array();
+            if (incorrect == null)
+                incorrect = "";
+            else {
+                incorrect = incorrect.split("/");
+
+                // remove last empty element
+                incorrect.pop();
+            }
+
+            grade = (totalquestions - incorrect.length) / totalquestions * 100;
+            grade = grade.toFixed(2);
+            //var correctQuestion1 = totalquestions - incorrect.length + " out of " + totalquestions + "Your grade is " + GetGrade(grade);
+            var correctQuestion1 = "Your result is " + grade + "%";
+            $("#result-description").html(correctQuestion1);
+            //alert(correctQuestion1);
+        }
+
+        function ShowOptions() {
+            var wrong = 0;
+            var t = '';
+
+            for (i = 1; i <= totalquestions; i++) {
+                for (temp = 0; temp < incorrect.length; temp++) {
+                    if (i == incorrect[temp])
+                        wrong = 1
+                }
+
+                //t =  $("#answer" + i).attr("data-selected-answer");
+                    
+                if (wrong == 1) {
+                    //$("#qr" + i).css("color", "red");
+                    $("#qaw" + i).show();
+                    wrong = 0
+                    //$(".w-corrent-option").html(t);
+                    //alert(t);
+                }
+                else {
+                    $("#qac" + i).show();
+                    //$("#qrc" + i).css("color", "green");
+                    //$(".c-corrent-option").html(t);
+                    //alert(t);
+                }
+            }
+
+        }
+
+        function ExitExam(courseId) {
+            var r = confirm("Are you sure to leave this page !");
+            if (r == true) {
+                window.location = '/CourseClasses/Resume/' + courseId;
+            }
+
+        }
+
+
+    </script>
+}

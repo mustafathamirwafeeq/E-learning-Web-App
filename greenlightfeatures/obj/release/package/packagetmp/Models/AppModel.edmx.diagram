@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="351acebe2514436a8d7f83e8179b15a8" Name="Diagram1" ZoomLevel="77">
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.AspNetRoles" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.AspNetUserClaims" Width="1.5" PointX="13" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.AspNetUserLogins" Width="1.5" PointX="13" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.AspNetUserRoles" Width="1.5" PointX="16" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.AspNetUsers" Width="1.5" PointX="10.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.Attachment" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.Attendance" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.CMSPage" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.Course" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.CourseClass" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.Evaluation" Width="1.875" PointX="8.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.Exam" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.ExamQuestion" Width="1.5" PointX="8.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.ExamType" Width="1.5" PointX="3.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.News" Width="1.5" PointX="2.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.Question" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.TrainingBase" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <AssociationConnector Association="GreenLightFeaturesModel.FK_AspNetUserRoles_AspNetRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenLightFeaturesModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenLightFeaturesModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenLightFeaturesModel.FK_AspNetUserRoles_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenLightFeaturesModel.FK_CourseClassAttendance" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenLightFeaturesModel.FK_Questions_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenLightFeaturesModel.FK_UserCourses_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenLightFeaturesModel.FK_UserCourseTrainingBase" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenLightFeaturesModel.FK_Grade_ToTest" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenLightFeaturesModel.FK_Test_ToTestType" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenLightFeaturesModel.FK_TestQuestions_ToTest" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenLightFeaturesModel.FK_TestQuestions_ToQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenLightFeaturesModel.AttachmentCourseClass" />
+        <AssociationConnector Association="GreenLightFeaturesModel.ExamCourseClass" />
+        <EntityTypeShape EntityType="GreenLightFeaturesModel.EvaluationType" Width="1.5" PointX="8" PointY="5.25" />
+        <AssociationConnector Association="GreenLightFeaturesModel.EvaluationEvaluationType" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

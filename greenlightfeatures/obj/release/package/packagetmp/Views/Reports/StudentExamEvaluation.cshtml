@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "ClassSchedule";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>Select Student and Exam for Evaluation</h4>
+    </div>
+    <div class="panel panel-body">
+        <label>Student</label>
+        @Html.DropDownList("StudentId", (SelectList)ViewBag.Students, new { @onChange = "ShowExams()" })
+        @if (ViewBag.SID != 0)
+        {
+            <label>Exam</label>
+            @Html.DropDownList("ExamId", (SelectList)ViewBag.Exams)
+        }
+        <button class="btn btn-success" onclick="GoToStudentEvaluation()">Download as PDF</button>
+    </div>
+</div>
+<script type="text/javascript">
+    var urlStudentExamEvaluationPDF = '@Url.Action("DoStudentEvaluationPDF", "Exams")';
+    var urlStudentExamEvaluation = '@Url.Action("StudentExamEvaluation", "Reports")';
+    function GoToStudentEvaluation() {
+        var sid = $("#StudentId").val();
+        var eid = $("#ExamId").val();
+        if (sid == null || sid == '' || sid == undefined) {
+            alert('Please select student first.');
+        }
+        else if (eid == null || eid == '' || eid == undefined) {
+            alert('Please select exam first.');
+        }
+        else {
+            window.location.href = urlStudentExamEvaluationPDF + "?sid=" + sid + "&eid=" + eid;
+        }
+    }
+    function ShowExams() {
+        var sid = $("#StudentId").val();
+        $("#ExamId").hide();
+        window.location.href = urlStudentExamEvaluation + "?sid=" + sid;
+    }
+</script>

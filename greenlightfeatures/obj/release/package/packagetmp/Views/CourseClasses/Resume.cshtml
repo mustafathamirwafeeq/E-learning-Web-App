@@ -1,0 +1,99 @@
+﻿
+@model ELearning.Models.CourseClass
+@{
+    ViewBag.Title = Model.Title + " Class";
+    Layout = "~/Views/Shared/_DashboardUser.cshtml";
+}
+
+<input type="hidden" name="StudentId" id="StudentId" value="@ViewBag.StudentId" />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h4>@ViewBag.Title</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            @{ Html.RenderAction("CourseLeftBar", "CourseClasses", new { id = Model.Id }); }
+                        </div>
+                        <div class="col-md-9" id="right-section">
+
+                            <div class="alert alert-success alert-dismissible" role="alert" style="display: none;">
+                                <span id="alert-message">Sucess</span>
+                            </div>
+                            <h4>Exam List</h4>
+                            <ul class="list-group">
+                                @foreach (var item in Model.Exam.Where(cm => cm.IsDeleted == false && cm.IsPublished == true && cm.ExamQuestion.Count > 0))
+                                {
+                                    <li class="list-group-item">
+                                        <span><a href="javascript:void(0)" onclick="TakeExam('@item.Id')">@item.Title</a></span>
+                                        <span class="pull-right">
+                                            @*@Html.ActionLink("View Evalution", "Evalution", "Exams", new { id= item.Id }, null)*@
+                                            @{
+                                    var lastEvalution = item.Evaluation.OrderByDescending(cee => cee.Id).FirstOrDefault();
+                                    string grade = string.Empty;
+                                    if (lastEvalution != null)
+                                    {
+                                        grade = lastEvalution.Grade;
+                                    }
+
+                                            }
+                                            <span>Last result: </span> @(string.IsNullOrEmpty(grade) ? "N/A" : @grade)
+                                        </span>
+
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="~/Scripts/my-script.js"></script>
+    <script type="text/javascript">
+        var StudentId = $("#StudentId").val();
+
+        function TakeExam(examId) {
+            var limit = StudentExamCount(examId);
+            if (limit) {
+                ShowSuccessMessage("You already have taken this exam twice")
+                return;
+            }
+            else {
+                var r = confirm("Are you sure to take this exam !");
+                if (r == true) {
+
+                    window.location = '/Exams/TakeExam/?id=' + examId;
+
+                }
+            }
+        }
+
+        function StudentExamCount(examId) {
+            var ret;
+            $.ajax({
+                url: '/Exams/ExceedEvaluations/?studentId=' + StudentId + "&examId=" + examId, async: false, success: function (result) {
+                    //alert(result.data);
+                    ret = result.data;
+                }, error: function () {
+                    ShowErrorMessage("Sorry! system failed to perform action.");
+                }
+            });
+            return ret;
+        }
+    </script>
+
+}
+
+
+
+
+

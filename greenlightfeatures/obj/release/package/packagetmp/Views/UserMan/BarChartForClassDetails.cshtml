@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "BarChart";
+    Layout = null;
+}
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<div>
+    <div id="barchartClassDetails" style="width: 100%; height: 500px;"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        google.load("visualization", "1.1", { packages: ["bar"] });
+        drawBarChartForClassDetails();
+
+        function drawBarChartForClassDetails() {
+
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                url: '/UserMan/GetBarChartDataForClassDetails',
+                data:{id:@ViewBag.ID},
+                dataType: "json",
+                success: function (barChartData) {
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Classes');
+                    data.addColumn('number', 'Total Students');
+                    data.addColumn('number', 'Total Class Days');
+                    data.addColumn('number', 'Completed Class Days');
+                    data.addColumn('number', 'Remaining Class Days');
+                    $.each(barChartData, function (i, d) {
+                        data.addRow([barChartData[i].Label, barChartData[i].Value1, barChartData[i].Value2, barChartData[i].Value3, barChartData[i].Value4]);
+                    });
+                    var options = {
+                        chart: {
+                            title: 'Class Full Graphical Details',
+                            subtitle: ''
+                        },
+                        bars: 'vertical'
+                    };
+                    var chart = new google.charts.Bar(document.getElementById('barchartClassDetails'));
+                    chart.draw(data, options);
+                },
+                error: function (data) {
+                    alert("Error In getting Records");
+                }
+            });
+        }
+    });
+</script>

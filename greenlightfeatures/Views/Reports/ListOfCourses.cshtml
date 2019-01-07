@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ELearning.Models.Course>
+
+@{
+    ViewBag.Title = "ListOfCourses";
+    if (ViewBag.IsPDF == true)
+    {
+        Layout = "~/Views/Shared/_PDFLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Dashboard.cshtml";
+    }
+    int counter = 1;
+}
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>List of Courses</h4>
+    </div>
+    <div class="panel-body">
+        @if (ViewBag.IsPDF == false)
+        {
+            @Html.ActionLink("Download as PDF", "ListOfCoursesPDF", new { isPDF = true }, new { @class = "btn btn-success" })
+        }
+        <br />
+        <br />
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(counter++)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    @if (item.IsDeleted)
+                    {
+                        <td><label class="label label-danger">Removed</label></td>
+                    }
+                    else if (item.IsPublished)
+                    {
+                        <td><label class="label label-success">Active</label></td>
+                    }
+                    else
+                    {
+                        <td><label class="label label-warning">Inactive</label></td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+</script>

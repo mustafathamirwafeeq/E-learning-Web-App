@@ -1,0 +1,20 @@
+﻿@using ELearning.Helper;
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div style="float:left;">
+            <a style="float:left;" href="/Home/Index"><img src="/Images/e-learing-logo.png" alt="logo" /></a>
+            <h1 style="float:left;" id="mainHeading">E-Learning Portal</h1> 
+        </div>
+        <div class="navbar-collapse collapse ">
+            <ul class="nav navbar-nav">
+                <li>@Html.MenuLink("Home", "Index", "Home")</li>
+                <li>@Html.MenuLink("About Us", "About", "Home")</li>
+                <li>@Html.MenuLink("Contact Us", "Contact", "Home")</li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.MenuLink("Dashboard", "Dashboard", "Home")</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

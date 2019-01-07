@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "PieChartForExamEvaluation";
+    Layout = null;
+}
+
+<script src="~/Scripts/jsAPI.js"></script>
+<div id="PieChartForExam" style="height: 400px;"></div>
+<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+        $.ajax({
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            url: '/UserMan/GetPieChartDataForExams',
+            data:{cid:@ViewBag.CID, sid:@ViewBag.SID},
+            dataType: "json",
+            success: function (lineChartData) {
+                var data = google.visualization.arrayToDataTable([
+        ['Attendance', 'Value'],
+        ['Total no of Days',     lineChartData.Total],
+        ['Presents',      lineChartData.Presents],
+        ['Absents',  lineChartData.Absents]
+                ]);
+
+                var options = {
+                    title: 'Student Attendance',
+                    is3D: true,
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('PieChartForExam'));
+                chart.draw(data, options);
+            },
+            error: function (data) {
+                alert("Error In getting Records");
+            }
+        });
+    }
+</script>

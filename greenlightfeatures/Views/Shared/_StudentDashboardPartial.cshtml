@@ -1,0 +1,41 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2">
+            @Html.Partial("_StudentSidebarPartialGen")
+        </div>
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-lg-8">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">My Courses</h4>
+                            </div>
+                            <div class="panel-body">
+                                @{ Html.RenderAction("UserCourses", "Courses");}
+                            </div>
+                        </div>
+                    </div>
+                @*<div class="col-lg-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">All Courses</h4>
+                        </div>
+                        <div class="panel-body">
+                            @{ Html.RenderAction("List", "CourseClasses");}
+                        </div>
+                    </div>
+                </div>*@
+                <div class="col-lg-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><i class="fa fa-comment"></i> Recent Announcements</h4>
+                        </div>
+                        <div id="recent-news" class="panel-body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+﻿@model ELearning.Models.Question
+
+@{
+    ViewBag.Title = "Delete Question";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+
+        <h3>Are you sure you want to delete this?</h3>
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.QuestionText)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.QuestionText)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Option1)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Option1)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Option2)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Option2)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Option3)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Option3)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Option4)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Option4)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CorrectAnswer)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CorrectAnswer)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AnswerData)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AnswerData)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserId)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+            }
+        </div>
+    </div>
+</div>

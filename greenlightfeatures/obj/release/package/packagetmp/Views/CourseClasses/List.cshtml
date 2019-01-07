@@ -1,0 +1,20 @@
+﻿
+@model IEnumerable<ELearning.Models.CourseClass>
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 course-list ">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h5>@Html.DisplayFor(modelItem => item.Title)</h5>
+                    </div>
+                    <div class="panel-body">
+                        <p><span class="text-muted">Instructor</span> @(ELearning.Models.Utilities.GetUserFullName(item.InstructorId))</p>
+                        <p><span class="text-muted">Base</span> @item.TrainingBase.Name</p>
+                        <p class="pull-right"><a href="/CourseClasses/StartCourse/?id=@item.Id" title="Start Course">Start</a></p>
+                    </div>
+                </div>
+            </div>
+        }
+
+

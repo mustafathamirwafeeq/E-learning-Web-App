@@ -1,0 +1,26 @@
+﻿<div style="font-family: arial; margin: 0 auto; width: 633px;">
+    <h2 style="font-size: 20px; margin: 0px;">A new message has been received!</h2>
+    <hr />
+    <h3 style="margin: 13px 0;">Contact Information</h3>
+    <table style="border-radius: 5px; box-shadow: 0 0 11px; margin-bottom: 16px; width: 100%;">
+        <tr>
+            <td style="font-size: 15px; font-weight: bold; width: 199px; vertical-align: top;">Name</td>
+            <td style="font-size: 15px;">[Name]</td>
+        </tr>
+        <tr>
+            <td style="font-size: 15px; font-weight: bold; width: 199px; vertical-align: top;">Email Address</td>
+            <td style="font-size: 15px;">[Email]</td>
+        </tr>
+        <tr>
+            <td style="font-size: 15px; font-weight: bold; width: 199px; vertical-align: top;">Subject</td>
+            <td style="font-size: 15px;">[Subject]</td>
+        </tr>
+    </table>
+    <hr />
+    <h3 style="margin: 13px 0;">Message</h3>
+    <table style="border-radius: 5px; box-shadow: 0 0 11px; margin-bottom: 16px; width: 100%;">
+        <tr>
+            <td style="font-size: 15px;">[Message]</td>
+        </tr>
+    </table>
+</div>

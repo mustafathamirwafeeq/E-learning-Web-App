@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ELearning.Models.Exam>
+
+@{
+    ViewBag.Title = "Exam Listing";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<h1><small>Exam Listing</small></h1>
+<ol class="breadcrumb">
+    <li><a href="/home/index"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active"><i class="fa fa-edit"></i> Exams</li>
+</ol>
+<ul class="list-group">
+
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            <h4>@Html.DisplayFor(modelItem => item.Title) <small>@Html.ActionLink("Take Exam", "TakeExam", new { id = item.Id }) | @Html.ActionLink("Evalution History", "Evalution", new { id = item.Id })</small></h4>
+            <h5>@Html.DisplayFor(modelItem => item.Cours.Title) | @Html.DisplayFor(modelItem => item.ExamType.Type)</h5>
+            <p>Exams' duration is @item.Duration minutes</p>
+            <p>
+                <a href="javascript:;">Questions <span class="badge">@item.ExamQuestions.Count</span></a>
+                <ul>
+                    @foreach (var a in item.ExamQuestions)
+                    {
+                        <li>@a.Question.QuestionText</li>
+                    }
+                </ul>
+            </p>
+
+        </li>        
+    }
+</ul>

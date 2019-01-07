@@ -1,0 +1,21 @@
+﻿@model IEnumerable<ELearning.Models.Question>
+
+@{
+    ViewBag.Title = "Question Listing";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+    int cnt = 0;
+}
+
+<h1><small>Question Listing</small></h1>
+<ol class="breadcrumb">
+    <li><a href="/home/index"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active"><i class="fa fa-edit"></i> Questions</li>
+</ol>
+
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">@Html.DisplayFor(modelItem => item.QuestionText)</li>
+    }
+</ul>
+

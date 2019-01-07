@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ELearning.Models.UserViewModel>
+@{
+    ViewBag.Title = "User Listing";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="alert alert-success alert-dismissible" role="alert" style="display: none;">
+    <span id="alert-message">Sucess</span>
+</div>
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FullName</td>
+                        <td>@item.Email</td>
+                        <td>@item.Role</td>
+                        <td>
+                            <a href="/Account/EditUser/@item.UserId">Edit</a>|
+                            <a href="javascript:;" onclick="Delete(this,'@item.Role', '@item.Username')">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/my-script.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+        });
+
+        function Delete(row, role, username) {
+            var r = confirm("Are you sure to remove " + username);
+            if (r == true) {
+
+                $.ajax({
+                    url: '/Account/DeleteAccount/?roleName=' + role + "&userName=" + username,
+                    success: function (result) {
+                        ShowSuccessMessage(result.data);
+                        $(row.parentNode.parentNode).fadeOut(1000, function () {
+                            $(row.parentNode.parentNode).remove();
+                        });
+                    }
+                });
+            }
+
+        }
+    </script>
+}
+

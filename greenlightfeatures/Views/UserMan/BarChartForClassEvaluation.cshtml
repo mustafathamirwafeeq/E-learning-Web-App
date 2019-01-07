@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ELearning.Models.Dto.StudentClassDetail>
+@{
+    ViewBag.Title = "BarChartForBase";
+    Layout = null;
+}
+
+<script src="~/Scripts/jsAPI.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['bar']}]}"></script>
+<div id="barchartForClassEvaluation" style="height: 400px;"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        drawBarChartForClassEvaluation();
+        function drawBarChartForClassEvaluation() {
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                url: '/UserMan/GetBarChartDataForClassEvaluation',
+                data: { clsId: @ViewBag.ClassID},
+                dataType: "json",
+                success: function (barChartData) {
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Students');
+                    data.addColumn('number', 'Evaluation Marks');
+                    $.each(barChartData, function (i, d) {
+                        data.addRow([barChartData[i].Label, barChartData[i].Value1]);
+                    });
+                    var options = {
+                        chart: {
+                            title: 'Overall Students Evaluation',
+                            subtitle: ''
+                        },
+                        bars: 'vertical'
+                    };
+                    var chart = new google.charts.Bar(document.getElementById('barchartForClassEvaluation'));
+                    chart.draw(data, options);
+                },
+                error: function (data) {
+                    alert("Error In getting Records");
+                }
+            });
+        }
+    });
+</script>

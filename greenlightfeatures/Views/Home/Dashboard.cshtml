@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    if (ViewBag.IsPDF == true)
+    {
+        Layout = "~/Views/Shared/_PDFLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    string role = ELearning.Models.Utilities.GetInstance().GetCurrentUserRole();
+}
+
+
+@if (role.Equals("Admin"))
+{
+    @Html.Partial("_AdminDashboardPartial")
+}
+else if (role.Equals("Moderator"))
+{
+    @Html.Partial("_ModeratorDashboardPartial")
+}
+else if (role.Equals("Student"))
+{
+    @Html.Partial("_StudentDashboardPartial")
+}
+else if (role.Equals("Management"))
+{
+    @Html.Partial("_UserManDashboardPartial")
+}
+
+@section scripts{
+    <script type="text/javascript">
+        var Role = '@role';
+
+        $(function () {
+            if (Role == "Admin") {
+
+            }
+            //// get replies
+            $.ajax({
+                url: '/News/List',
+                success: function (data) {
+                    $('#recent-news').html(data);
+                }
+            });
+            // get evalutions
+            $.ajax({
+                url: '/CourseClasses/RecentClasses',
+                success: function (data) {
+                    $('#recent-evalutions').html(data);
+                }
+            });
+        });
+    </script>
+}
+
+
+
+
+

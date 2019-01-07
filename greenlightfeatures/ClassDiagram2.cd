@@ -1,0 +1,662 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ELearning.Helper.HtmlHelpers" Collapsed="true">
+    <Position X="9.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>App_Data\HtmlHelpers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.BundleConfig" Collapsed="true">
+    <Position X="12.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\BundleConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.FilterConfig" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\FilterConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.ApplicationUserManager" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\IdentityConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.EmailService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\IdentityConfig.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ELearning.SmsService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\IdentityConfig.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ELearning.RouteConfig" Collapsed="true">
+    <Position X="14.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\RouteConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Startup" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAgAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\Startup.Auth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.WebApiConfig" Collapsed="true">
+    <Position X="11" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\WebApiConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.MvcApplication" Collapsed="true">
+    <Position X="14.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.AccountController" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAChQCAAAgAFAAEAFgEABgABIKIgAEEVAQUkAgA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.AttachmentsController" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAAAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\AttachmentsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.AttendanceController" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAQQAAAAAAAQAAAAIAAAAEACAAEAAAAAAAg=</HashCode>
+      <FileName>Controllers\AttendanceController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.CMSPagesController" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAAAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\CMSPagesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.CourseClassesController" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAACARACCAAAwQAABEAAEAAEACAAGAAEoQAAI=</HashCode>
+      <FileName>Controllers\CourseClassesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.CoursesController" Collapsed="true">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAAAAAAAAAAAEABEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\CoursesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.EvaluationsController" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgACBAACAQAAAgAAAAAAAAgAEAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Controllers\EvaluationsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.EvaluationTypesController" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAAAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\EvaluationTypesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.ExamQuestionsController" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAAAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ExamQuestionsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.ExamsController" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIAAgCEAACARAACAAIAAAAAEAAEAAEASAAEEQAAEAAI=</HashCode>
+      <FileName>Controllers\ExamsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.ExamTypesController" Collapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAAAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ExamTypesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.HomeController" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAEACAAAAAAAAAAAAAAAAAEBAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.NewsController" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAAAAAAAAAAAEAAEACAAEAAAQAAAI=</HashCode>
+      <FileName>Controllers\NewsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.QuestionsController" Collapsed="true">
+    <Position X="7.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAAAACAAAAAAEAAEACAAEAAAAAAAI=</HashCode>
+      <FileName>Controllers\QuestionsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.ReportsController" Collapsed="true">
+    <Position X="11" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYAAAEAAAAQQAgAQAAgAAAAAEAAAgIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\ReportsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.TrainingBasesController" Collapsed="true">
+    <Position X="5.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAAAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\TrainingBasesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.UploadController" Collapsed="true">
+    <Position X="7.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\UploadController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.UserManController" Collapsed="true">
+    <Position X="4" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BhAAAEAggABAAAABDBBiICSAABAAwAADAABEAEAAAAA=</HashCode>
+      <FileName>Controllers\UserManController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Migrations.CustomProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAMAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAI=</HashCode>
+      <FileName>Migrations\201504170449569_CustomProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ELearning.Migrations.CustomProfile02" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAMAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAI=</HashCode>
+      <FileName>Migrations\201504170501312_CustomProfile02.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ELearning.Migrations.user02" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAMAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAI=</HashCode>
+      <FileName>Migrations\201504171130509_user02.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ELearning.Migrations.user03" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAMAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAI=</HashCode>
+      <FileName>Migrations\201504171133304_user03.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ELearning.Migrations.user04" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAMAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAI=</HashCode>
+      <FileName>Migrations\201504171841300_user04.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ELearning.Migrations.user05" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAMAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAI=</HashCode>
+      <FileName>Migrations\201504171853478_user05.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ELearning.Migrations.autoadmin" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAMAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAI=</HashCode>
+      <FileName>Migrations\201504171856578_auto-admin.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ELearning.Migrations.user06" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAMAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAI=</HashCode>
+      <FileName>Migrations\201504171907134_user06.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ELearning.Migrations.user07" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAMAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAI=</HashCode>
+      <FileName>Migrations\201504171908125_user07.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ELearning.Migrations.autoadmin2" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAMAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAI=</HashCode>
+      <FileName>Migrations\201504171910576_auto-admin2.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ELearning.Migrations.CustomProfile03" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAMAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAI=</HashCode>
+      <FileName>Migrations\201504280713365_CustomProfile03.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ELearning.Migrations.CustomProfile04" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAMAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAI=</HashCode>
+      <FileName>Migrations\201504280723235_CustomProfile04.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ELearning.Migrations.Configuration" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Migrations\Configuration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.ExternalLoginConfirmationViewModel" Collapsed="true">
+    <Position X="14.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.ExternalLoginListViewModel" Collapsed="true">
+    <Position X="16.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAQ=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.ManageUserViewModel" Collapsed="true">
+    <Position X="12.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAEAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.LoginViewModel" Collapsed="true">
+    <Position X="11" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAACAAAAAAAgAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.RegisterViewModel" Collapsed="true">
+    <Position X="9.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEACAAAKAAEQAAQAAAAAAQAAACAAAAAAAAIAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.ResetPasswordViewModel" Collapsed="true">
+    <Position X="12.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAgAAAAAAAAAAACAAAAAAAAIAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.ForgotPasswordViewModel" Collapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.UserViewModel" Collapsed="true">
+    <Position X="7.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEACAAAKAAEQAAQAgAAAAQAAACAABAAAAAIAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.GreenLightFeaturesEntities" Collapsed="true">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECgEEQAgCAgAAAAIAAAQAAEAAAQABEABAAAAAIAAE=</HashCode>
+      <FileName>Models\AppModel.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.AspNetRoles" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Models\AspNetRoles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.AspNetUserClaims" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAQAAAAAAAAQAAAAAgAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Models\AspNetUserClaims.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.AspNetUserLogins" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAgAAAAAEAAAABAAAAAAAAA=</HashCode>
+      <FileName>Models\AspNetUserLogins.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.AspNetUserRoles" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAIQAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Models\AspNetUserRoles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.AspNetUsers" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAEACAAoOAAAAAAQAgBAAAQQAAKARRAABAAIQA=</HashCode>
+      <FileName>Models\AspNetUsers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Attachment" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAAAAAEAAAAIAAAAAAAAAAABAAABAAAQAAAA=</HashCode>
+      <FileName>Models\Attachment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Attendance" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAASAAAABAAAAAAAAAAAAAAAAAAAAABAAAABACYAAAA=</HashCode>
+      <FileName>Models\Attendance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.CMSPage" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAEAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CMSPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Course" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAEAAAAAAAAAAAAAAAABEAAAAARAAAAA=</HashCode>
+      <FileName>Models\Course.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.CourseClass" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAGAEAEAAAAAEAAAIAgAQAgICAgAABAAAgAAEAAAAA=</HashCode>
+      <FileName>Models\CourseClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Evaluation" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACAAAAAAAAgAAAAAAAANACAAAAAGBBAAAAAQGCIAA=</HashCode>
+      <FileName>Models\Evaluation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.EvaluationType" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACgAAAAAAgAAAAAAAAAMQCAAAAAGABAAAAAAAAAAA=</HashCode>
+      <FileName>Models\EvaluationType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Exam" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACgAAAAgCCAEAAAAAAAAgAAAAAAABAAAAAARQEIAA=</HashCode>
+      <FileName>Models\Exam.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.ExamQuestion" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAASAAAA=</HashCode>
+      <FileName>Models\ExamQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.ExamType" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAABAAQAAAQAAAAA=</HashCode>
+      <FileName>Models\ExamType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.News" Collapsed="true">
+    <Position X="16.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAgAAAFAEAAAAIAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Models\News.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Question" Collapsed="true">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGAIBwAgAAAAAAgIAAAAgAAAAAAADAAAAAAQAAAAA=</HashCode>
+      <FileName>Models\Question.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.TrainingBase" Collapsed="true">
+    <Position X="4" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAEAgAAAAAAAIABQAAAAAAABCAAABAAAAAAA=</HashCode>
+      <FileName>Models\TrainingBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.ApplicationUser" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAECAAAAKAAAAAAAAgAAAAQAAACAABAAAAAIAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.ApplicationDbContext" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAABAAAAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Utilities" Collapsed="true">
+    <Position X="9.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYAAAEAAAASCEQACCQEgAgCghACiABBAAAAAEgEQAAA=</HashCode>
+      <FileName>Models\Utilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.ChartData" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgACAAAAA=</HashCode>
+      <FileName>Models\Utilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Dto.ClassDate" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAEAAEAAAAA=</HashCode>
+      <FileName>Models\DtoObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Dto.ExamDto" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAKAAAAAAAAAAAAAAAAAAAAAAAAAAAgABAA=</HashCode>
+      <FileName>Models\DtoObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Dto.EvalutionDto" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAIABAAAAAAAAIAAAQAAAAAAAAAAAABAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\DtoObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Dto.ExamFullView" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DtoObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Dto.ForumReplyDto" Collapsed="true">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAIAAAQIAAAAAAAAAAAAEAAAAAgAAAAA=</HashCode>
+      <FileName>Models\DtoObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Dto.UserCoursesDto" Collapsed="true">
+    <Position X="2.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAEAAAEAQAAAIBAAIAAQAggEAAAAAAAAAgAAEAAAAA=</HashCode>
+      <FileName>Models\DtoObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Dto.AttendanceDTO" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAEAAAAAAABAAAAAAAAAAIAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DtoObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Dto.BaseDetail" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAEAgAAAAAAAAAEAAAIAAAAIAAAAAAAQAA=</HashCode>
+      <FileName>Models\DtoObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Dto.YearMonthClass" Collapsed="true">
+    <Position X="12.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAgAAAAAAgAAAAAAAAAAEoAAAAAAAAAA=</HashCode>
+      <FileName>Models\DtoObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Dto.StudentClassDetail" Collapsed="true">
+    <Position X="2.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAQAAAAAAAAgIAAAAAAAAAQAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Models\DtoObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Repo.CourseClassRepo" Collapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAQAAAAAQAgAAAAAAAAA=</HashCode>
+      <FileName>Repo\CourseRepo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Repo.EvalutionRepo" Collapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Repo\EvalutionRepo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Repo.ExamRepo" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAIAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repo\ExamRepo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Repo.NewsRepo" Collapsed="true">
+    <Position X="2.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Repo\NewsRepo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Repo.QuestionRepo" Collapsed="true">
+    <Position X="5.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAABAAAAA=</HashCode>
+      <FileName>Repo\QuestionRepo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Repo.UserRepo" Collapsed="true">
+    <Position X="5.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAYAAAAAAAAAAAAACAAAAAAAAAEAAAAAGAAgAAAAAAA=</HashCode>
+      <FileName>Repo\UserRepo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="ELearning.Models.Enum.UserCourseEnum" Collapsed="true">
+    <Position X="4" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DtoObjects.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ELearning.Models.Enum.CMSPageEnum" Collapsed="true">
+    <Position X="0.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAIAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DtoObjects.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ELearning.Models.Enum.NewsAudience" Collapsed="true">
+    <Position X="2.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAIAAAAAAAAIAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Models\DtoObjects.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ELearning.Models.Enum.WeeklyHoliday" Collapsed="true">
+    <Position X="5.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DtoObjects.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

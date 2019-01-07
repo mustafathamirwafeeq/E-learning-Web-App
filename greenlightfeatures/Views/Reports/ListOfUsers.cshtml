@@ -1,0 +1,130 @@
+﻿@model IEnumerable<ELearning.Models.AspNetUsers>
+
+@{
+    ViewBag.Title = "ListOfUsers";
+    if (ViewBag.IsPDF == true)
+    {
+        Layout = "~/Views/Shared/_PDFLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Dashboard.cshtml";
+    }
+    string roleName = ViewBag.Role;
+    int counter = 1;
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        @if (roleName == "")
+        {
+            <h4>List of all Users</h4>
+        }
+        else if (roleName == "Student")
+        {
+            <h4>List of Students</h4>
+        }
+        else if (roleName == "Moderator")
+        {
+            <h4>List of Staffs</h4>
+        }
+        else if (roleName == "Management")
+        {
+            <h4>List of Management Users</h4>
+        }
+    </div>
+    <div class="panel-body">
+        @if (ViewBag.IsPDF == false)
+        {
+            <table class="table" style="width:45%;">
+                <tr>
+                    <td><lable>Select Role</lable></td>
+                    <td>@Html.DropDownList("roleName", (SelectList)ViewBag.Roles, new { })</td>
+                    <td><button class="btn btn-success" onclick="LoadUsers()">Go</button></td>
+                    <td>
+                        @Html.ActionLink("Download as PDF", "ListOfUsersPDF", new { role = ViewBag.Role }, new { @class = "btn btn-success" })
+                    </td>
+                </tr>
+            </table>
+        }
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>
+                    User Name
+                </th>
+                <th>
+                    Full Name
+                </th>
+                <th>
+                    DOB
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Phone
+                </th>
+                <th>
+                    Address
+                </th>
+                @if (roleName == "")
+                {
+                    <th>Role</th>
+                }
+                <th>
+                    Status
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(counter++)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateOfBirth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    @if (roleName == "")
+                    {
+                        <td>@Html.DisplayFor(modelItem => item.AspNetUserRoles.First().AspNetRoles.Name)</td>
+                    }
+                    @if (item.Status)
+                    {
+                        <td>
+                            <label class="label label-success">Active</label>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <label class="label label-danger">Disabled</label>
+                        </td>
+                    }
+
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    var urlLoadUsers = '@Url.Action("ListOfUsers","Reports")';
+    function LoadUsers() {
+        var role = $("#roleName").val();
+        window.location.href = urlLoadUsers + "?role=" + role;
+    }
+</script>

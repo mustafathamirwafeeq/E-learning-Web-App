@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ELearning.Models.Evaluation>
+<table class="table">
+    <tr>
+        <th>Exam</th>        
+        <th>Cours</th>        
+        <th>Grade</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Exam.Title
+            </td>
+            <td>
+                @item.Exam.Cours.Title
+            </td>
+            <td>
+                @item.Grade
+            </td>
+        </tr>
+    }
+</table>

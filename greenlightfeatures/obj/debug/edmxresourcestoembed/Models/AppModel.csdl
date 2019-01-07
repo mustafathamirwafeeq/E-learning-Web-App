@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GreenLightFeaturesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_AspNetUserRoles_AspNetRoles" FromRole="AspNetRoles" ToRole="AspNetUserRoles" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.FK_AspNetUserRoles_AspNetRoles" FromRole="AspNetUserRoles" ToRole="AspNetRoles" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUserRoles_AspNetUsers" FromRole="AspNetUserRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_AspNetUserRoles_AspNetUsers" FromRole="AspNetUsers" ToRole="AspNetUserRoles" />
+    <Property Name="IsAttendanceAuthorized" Type="Boolean" Nullable="false" DefaultValue="False" />
+    <Property Name="Status" Type="Boolean" Nullable="false" DefaultValue="True" />
+    <Property Name="CVPath" Type="String" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Attachment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FilePath" Type="String" MaxLength="516" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PubDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Order" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CourseClass" Relationship="GreenLightFeaturesModel.AttachmentCourseClass" FromRole="Attachment" ToRole="CourseClass" />
+    <Property Name="CourseClassId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Attendance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentIds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AttendanceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="isHoliday" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="isAllPresent" Type="Boolean" Nullable="false" />
+    <Property Name="CourseClassId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CourseClass" Relationship="Self.FK_CourseClassAttendance" FromRole="Attendance" ToRole="CourseClass" />
+    <Property Name="IsInstructorPresent" Type="Boolean" Nullable="false" DefaultValue="False" />
+  </EntityType>
+  <EntityType Name="CMSPage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IsPublished" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Question" Relationship="Self.FK_Questions_Courses" FromRole="Course" ToRole="Question" />
+    <NavigationProperty Name="CourseClass" Relationship="Self.FK_UserCourses_Courses" FromRole="Course" ToRole="CourseClass" />
+  </EntityType>
+  <EntityType Name="CourseClass">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TrainingBaseId" Type="Int32" Nullable="false" />
+    <Property Name="CourseId" Type="Int32" Nullable="false" />
+    <Property Name="InstructorId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+    <NavigationProperty Name="Attendance" Relationship="Self.FK_CourseClassAttendance" FromRole="CourseClass" ToRole="Attendance" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_UserCourses_Courses" FromRole="CourseClass" ToRole="Course" />
+    <NavigationProperty Name="TrainingBase" Relationship="Self.FK_UserCourseTrainingBase" FromRole="CourseClass" ToRole="TrainingBase" />
+    <NavigationProperty Name="Attachment" Relationship="GreenLightFeaturesModel.AttachmentCourseClass" FromRole="CourseClass" ToRole="Attachment" />
+    <NavigationProperty Name="Exam" Relationship="GreenLightFeaturesModel.ExamCourseClass" FromRole="CourseClass" ToRole="Exam" />
+    <Property Name="StudentIds" Type="String" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="true" />
+    <Property Name="ClassDates" Type="String" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Evaluation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <Property Name="ExamId" Type="Int32" Nullable="false" />
+    <Property Name="Grade" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ExamDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Exam" Relationship="Self.FK_Grade_ToTest" FromRole="Evaluation" ToRole="Exam" />
+    <NavigationProperty Name="EvaluationType" Relationship="GreenLightFeaturesModel.EvaluationEvaluationType" FromRole="Evaluation" ToRole="EvaluationType" />
+    <Property Name="EvaluationTypeId" Type="Int32" Nullable="false" />
+    <Property Name="IsStudentEvaluation" Type="Boolean" Nullable="false" />
+    <Property Name="Efforts" Type="Int32" Nullable="true" />
+    <Property Name="Comments" Type="String" Nullable="true" />
+    <Property Name="A1" Type="Boolean" Nullable="true" />
+    <Property Name="A2" Type="Boolean" Nullable="true" />
+    <Property Name="B1" Type="Boolean" Nullable="true" />
+    <Property Name="B2" Type="Boolean" Nullable="true" />
+    <Property Name="C1" Type="Boolean" Nullable="true" />
+    <Property Name="C2" Type="Boolean" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsPublished" Type="Boolean" Nullable="false" />
+    <Property Name="ExamTypeId" Type="Int32" Nullable="false" />
+    <Property Name="MaxGrade" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Evaluation" Relationship="Self.FK_Grade_ToTest" FromRole="Exam" ToRole="Evaluation" />
+    <NavigationProperty Name="ExamType" Relationship="Self.FK_Test_ToTestType" FromRole="Exam" ToRole="ExamType" />
+    <NavigationProperty Name="ExamQuestion" Relationship="Self.FK_TestQuestions_ToTest" FromRole="Exam" ToRole="ExamQuestion" />
+    <NavigationProperty Name="CourseClass" Relationship="GreenLightFeaturesModel.ExamCourseClass" FromRole="Exam" ToRole="CourseClass" />
+    <Property Name="CourseClassId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ExamQuestion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamId" Type="Int32" Nullable="false" />
+    <Property Name="QuestionId" Type="Int32" Nullable="false" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Exam" Relationship="Self.FK_TestQuestions_ToTest" FromRole="ExamQuestion" ToRole="Exam" />
+    <NavigationProperty Name="Question" Relationship="Self.FK_TestQuestions_ToQuestion" FromRole="ExamQuestion" ToRole="Question" />
+  </EntityType>
+  <EntityType Name="ExamType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Exam" Relationship="Self.FK_Test_ToTestType" FromRole="ExamType" ToRole="Exam" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="516" FixedLength="false" Unicode="false" />
+    <Property Name="PubDate" Type="DateTime" Precision="3" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Audience" Type="Int32" Nullable="false" />
+    <Property Name="ClassId" Type="Int32" Nullable="true" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionText" Type="String" MaxLength="516" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Option1" Type="String" MaxLength="516" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Option2" Type="String" MaxLength="516" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Option3" Type="String" MaxLength="516" FixedLength="false" Unicode="false" />
+    <Property Name="Option4" Type="String" MaxLength="516" FixedLength="false" Unicode="false" />
+    <Property Name="CorrectAnswer" Type="Int32" Nullable="false" />
+    <Property Name="AnswerData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CourseId" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_Questions_Courses" FromRole="Question" ToRole="Course" />
+    <NavigationProperty Name="ExamQuestion" Relationship="Self.FK_TestQuestions_ToQuestion" FromRole="Question" ToRole="ExamQuestion" />
+  </EntityType>
+  <EntityType Name="TrainingBase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContactDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Latitude" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Longitude" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CourseClass" Relationship="Self.FK_UserCourseTrainingBase" FromRole="TrainingBase" ToRole="CourseClass" />
+  </EntityType>
+  <Association Name="FK_AspNetUserRoles_AspNetRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUserRoles_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseClassAttendance">
+    <End Role="CourseClass" Type="Self.CourseClass" Multiplicity="1" />
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CourseClass">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="CourseClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Questions_Courses">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="Question" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserCourses_Courses">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="CourseClass" Type="Self.CourseClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseClass">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserCourseTrainingBase">
+    <End Role="TrainingBase" Type="Self.TrainingBase" Multiplicity="1" />
+    <End Role="CourseClass" Type="Self.CourseClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrainingBase">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseClass">
+        <PropertyRef Name="TrainingBaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Grade_ToTest">
+    <End Role="Exam" Type="Self.Exam" Multiplicity="1" />
+    <End Role="Evaluation" Type="Self.Evaluation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exam">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Evaluation">
+        <PropertyRef Name="ExamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Test_ToTestType">
+    <End Role="ExamType" Type="Self.ExamType" Multiplicity="1" />
+    <End Role="Exam" Type="Self.Exam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExamType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Exam">
+        <PropertyRef Name="ExamTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestQuestions_ToTest">
+    <End Role="Exam" Type="Self.Exam" Multiplicity="1" />
+    <End Role="ExamQuestion" Type="Self.ExamQuestion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exam">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExamQuestion">
+        <PropertyRef Name="ExamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestQuestions_ToQuestion">
+    <End Role="Question" Type="Self.Question" Multiplicity="1" />
+    <End Role="ExamQuestion" Type="Self.ExamQuestion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExamQuestion">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GreenLightFeaturesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+    <EntitySet Name="Attachment" EntityType="Self.Attachment" />
+    <EntitySet Name="Attendance" EntityType="Self.Attendance" />
+    <EntitySet Name="CMSPage" EntityType="Self.CMSPage" />
+    <EntitySet Name="Course" EntityType="Self.Course" />
+    <EntitySet Name="CourseClass" EntityType="Self.CourseClass" />
+    <EntitySet Name="Evaluation" EntityType="Self.Evaluation" />
+    <EntitySet Name="Exam" EntityType="Self.Exam" />
+    <EntitySet Name="ExamQuestion" EntityType="Self.ExamQuestion" />
+    <EntitySet Name="ExamType" EntityType="Self.ExamType" />
+    <EntitySet Name="News" EntityType="Self.News" />
+    <EntitySet Name="Question" EntityType="Self.Question" />
+    <EntitySet Name="TrainingBase" EntityType="Self.TrainingBase" />
+    <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles" Association="Self.FK_AspNetUserRoles_AspNetRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUserRoles_AspNetUsers" Association="Self.FK_AspNetUserRoles_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseClassAttendance" Association="Self.FK_CourseClassAttendance">
+      <End Role="CourseClass" EntitySet="CourseClass" />
+      <End Role="Attendance" EntitySet="Attendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Questions_Courses" Association="Self.FK_Questions_Courses">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Question" EntitySet="Question" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserCourses_Courses" Association="Self.FK_UserCourses_Courses">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="CourseClass" EntitySet="CourseClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserCourseTrainingBase" Association="Self.FK_UserCourseTrainingBase">
+      <End Role="TrainingBase" EntitySet="TrainingBase" />
+      <End Role="CourseClass" EntitySet="CourseClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Grade_ToTest" Association="Self.FK_Grade_ToTest">
+      <End Role="Exam" EntitySet="Exam" />
+      <End Role="Evaluation" EntitySet="Evaluation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Test_ToTestType" Association="Self.FK_Test_ToTestType">
+      <End Role="ExamType" EntitySet="ExamType" />
+      <End Role="Exam" EntitySet="Exam" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestQuestions_ToTest" Association="Self.FK_TestQuestions_ToTest">
+      <End Role="Exam" EntitySet="Exam" />
+      <End Role="ExamQuestion" EntitySet="ExamQuestion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestQuestions_ToQuestion" Association="Self.FK_TestQuestions_ToQuestion">
+      <End Role="Question" EntitySet="Question" />
+      <End Role="ExamQuestion" EntitySet="ExamQuestion" />
+    </AssociationSet>
+    <AssociationSet Name="AttachmentCourseClass" Association="GreenLightFeaturesModel.AttachmentCourseClass">
+      <End Role="Attachment" EntitySet="Attachment" />
+      <End Role="CourseClass" EntitySet="CourseClass" />
+    </AssociationSet>
+    <AssociationSet Name="ExamCourseClass" Association="GreenLightFeaturesModel.ExamCourseClass">
+      <End Role="Exam" EntitySet="Exam" />
+      <End Role="CourseClass" EntitySet="CourseClass" />
+    </AssociationSet>
+    <EntitySet Name="EvaluationTypeSet" EntityType="GreenLightFeaturesModel.EvaluationType" />
+    <AssociationSet Name="EvaluationEvaluationType" Association="GreenLightFeaturesModel.EvaluationEvaluationType">
+      <End Role="Evaluation" EntitySet="Evaluation" />
+      <End Role="EvaluationType" EntitySet="EvaluationTypeSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="AttachmentCourseClass">
+    <End Type="GreenLightFeaturesModel.Attachment" Role="Attachment" Multiplicity="*" />
+    <End Type="GreenLightFeaturesModel.CourseClass" Role="CourseClass" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="CourseClass">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Attachment">
+        <PropertyRef Name="CourseClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExamCourseClass">
+    <End Type="GreenLightFeaturesModel.Exam" Role="Exam" Multiplicity="*" />
+    <End Type="GreenLightFeaturesModel.CourseClass" Role="CourseClass" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="CourseClass">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Exam">
+        <PropertyRef Name="CourseClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="EvaluationType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="true" />
+    <NavigationProperty Name="Evaluation" Relationship="GreenLightFeaturesModel.EvaluationEvaluationType" FromRole="EvaluationType" ToRole="Evaluation" />
+    <Property Name="A1" Type="String" Nullable="false" />
+    <Property Name="A2" Type="String" Nullable="false" />
+    <Property Name="B1" Type="String" Nullable="false" />
+    <Property Name="B2" Type="String" Nullable="false" />
+    <Property Name="C1" Type="String" Nullable="false" />
+    <Property Name="C2" Type="String" Nullable="false" />
+  </EntityType>
+  <Association Name="EvaluationEvaluationType">
+    <End Type="GreenLightFeaturesModel.Evaluation" Role="Evaluation" Multiplicity="*" />
+    <End Type="GreenLightFeaturesModel.EvaluationType" Role="EvaluationType" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="EvaluationType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Evaluation">
+        <PropertyRef Name="EvaluationTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

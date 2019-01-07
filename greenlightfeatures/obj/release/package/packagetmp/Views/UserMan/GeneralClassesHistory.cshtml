@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ELearning.Models.Dto.YearMonthClass>
+
+@{
+    ViewBag.Title = "Classes Statistics by Year/Month";
+    if (ViewBag.IsPDF == true)
+    {
+        Layout = "~/Views/Shared/_PDFLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Dashboard.cshtml";
+    }
+    int year = 0;
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+        @if (ViewBag.IsPDF == false)
+        {
+            @Html.ActionLink("Download as PDF", "GeneralClassesHistoryPDF", new { }, new { @class = "btn btn-success" })
+        }
+        <br />
+        <br />
+        <table class="table">
+            <tr>
+                <th>
+                    Year
+                </th>
+                <th>
+                    Month
+                </th>
+                <th>
+                    Classes Initiated
+                </th>
+                <th>
+                    Classes Completed
+                </th>
+                <th>
+                    Students Enrolled
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @(item.Year == year ? "" : item.Year.ToString())
+                    </td>
+                    <td>
+                        @item.MonthString
+                    </td>
+                    <td>
+                        @item.ClassesInitiated
+                    </td>
+                    <td>
+                        @item.ClassesCompleted
+                    </td>
+                    <td>
+                        @item.StudentEnrolled
+                    </td>
+                </tr>
+                year = item.Year;
+            }
+
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+</script>

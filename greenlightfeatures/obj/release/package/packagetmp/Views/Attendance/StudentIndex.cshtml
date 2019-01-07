@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ELearning.Models.Dto.AttendanceDTO>
+
+@{
+    ViewBag.Title = "Index";
+    if (ViewBag.IsPDF == true)
+    {
+        Layout = "~/Views/Shared/_PDFLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Dashboard.cshtml";
+    }
+    int counter = 1;
+}
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.ClassName</h4>
+    </div>
+    <div style="margin-top:5px;margin-bottom:5px;margin-left:5px;font-size:20px;">
+        <label class="label label-primary" >Total: @(Model.Count())</label>
+        <label class="label label-warning">Pendings: @ViewBag.Pendings</label>
+        <label class="label label-success">Presents: @ViewBag.Presents</label>
+        <label class="label label-danger">Absents: @ViewBag.Absents</label>
+        <label class="label label-success">Percentage: @(ViewBag.Presents != 0 ? ((double.Parse((ViewBag.Presents/(Model.Count() - ViewBag.Pendings)).ToString())) * 100).ToString("0.00") : 0) %</label>
+    </div>
+    <div class="panel-body" style="overflow:auto;height:300px;">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Day
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Taken At
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(counter++)</td>
+                    <td>
+                        @(item.Date.ToString("dd/MM/yyyy"))
+                    </td>
+                    <td>
+                        @(item.Date.ToString("dddd"))
+                    </td>
+                    <td>
+                        @if (item.Attendance == null)
+                        {
+                            <label class="label label-warning">Pending</label>
+                        }
+                        else if (item.IsPresent)
+                        {
+                            <label class="label label-success">Present</label>
+                        }
+                        else
+                        {
+                            <label class="label label-danger">Absent</label>
+                        }
+                    </td>
+                    <td>
+                        @(item.Attendance == null ? "" : item.Attendance.CreateDate.ToString("dd/MM/yyyy"))
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+</script>

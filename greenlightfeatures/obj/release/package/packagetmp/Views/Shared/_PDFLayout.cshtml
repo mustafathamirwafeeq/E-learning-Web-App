@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title | Green Light Features</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <!-- css -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/fancybox/jquery.fancybox.css" rel="stylesheet">
+    @*<link href="~/Content/jcarousel.css" rel="stylesheet" />*@
+    <link href="~/Content/flexslider.css" rel="stylesheet" />
+    @*<link href="~/Scripts/owl-carousel/owl.carousel.css" rel="stylesheet">*@
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.9.2.js"></script>
+
+    <script src="~/Scripts/jquery.easing.1.3.js"></script>
+    <script src="~/Scripts/jquery.fancybox.pack.js"></script>
+    <script src="~/Scripts/jquery.fancybox-media.js"></script>
+    <script src="~/Scripts/portfolio/jquery.quicksand.js"></script>
+    <script src="~/Scripts/portfolio/setting.js"></script>
+    <script src="~/Scripts/jquery.flexslider.js"></script>
+    <script src="~/Scripts/animate.js"></script>
+    <script src="~/Scripts/custom.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    @RenderSection("Styles", required: false)
+    <script type="text/javascript">
+        $(document).scroll(function () {
+            localStorage['page'] = document.URL;
+            localStorage['scrollTop'] = $(document).scrollTop();
+        });
+        $(document).ready(function () {
+            if (localStorage['page'] == document.URL) {
+                $(document).scrollTop(localStorage['scrollTop']);
+            }
+        });
+    </script>
+    <link href="~/Content/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="wrapper">
+        <!-- start header -->
+        <header>
+            <section class="contactInfo">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="contact-area">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="navbar navbar-default navbar-static-top">
+                <div class="container">
+                    <div style="float:left;">
+                        <a style="float:left;" href="/Home/Index"><img src="/Images/logo.png" alt="logo" /></a>
+                        <h1 style="float:left;color:#059532">Green Light Web Portal</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+        @RenderBody()
+        <footer style="height:30px;padding-top:5px;">
+            <div class="container">
+                <div class="row">
+                    <div class=" col-lg-12">
+                    <div class="copyright">
+                        <p>
+                            &copy; Green Light @DateTime.Now.Year All rights Reserved-Powered By Peace Solutions-UAE
+                        </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

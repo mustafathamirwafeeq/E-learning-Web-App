@@ -1,0 +1,240 @@
+﻿@model ELearning.Models.Dto.EvalutionDto
+@{
+    ViewBag.Title = "Student Evaluation";
+    if (ViewBag.IsPDF == true)
+    {
+        Layout = "~/Views/Shared/_PDFLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Dashboard.cshtml";
+    }
+    ELearning.Models.AspNetUsers student = Model.Students.First();
+    var studentEvals = Model.Exam.Evaluation.Where(x => x.StudentId == student.UserId && x.IsStudentEvaluation).OrderBy(x => x.Id);
+    int? effort = studentEvals.Count() > 0 ? studentEvals.First().Efforts : null;
+    effort = effort ?? 0;
+    string comments = studentEvals.Count() > 0 ? studentEvals.First().Comments : "";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+        <div id="SuccessAlert" class="alert alert-success" role="alert" style="display: none;"><span class="">Sucess</span></div>
+
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>Student Name</th>
+                <td>@student.FullName</td>
+                <th>Instructor Name</th>
+                <td>@(ELearning.Models.Utilities.GetUserByID(Model.Exam.CourseClass.InstructorId).FullName)</td>
+                <th>Exam</th>
+                <td>@Model.Exam.Title</td>
+                <th>Base Name</th>
+                <td>@Model.Exam.CourseClass.TrainingBase.Name</td>
+            </tr>
+        </table>
+        <label>Baseline Diagnostic Test Results</label>
+        <br />
+        <table class="tblEvals table">
+            @foreach (var evalType in Model.EvalTypes)
+            {
+                <tr>
+                    <th></th>
+                    <th><a style="cursor:pointer" onclick="ShowDetailsBox('@evalType.A1')">A1-Basic User</a></th>
+                    <th><a style="cursor:pointer" onclick="ShowDetailsBox('@evalType.A1')">A2-Basic User</a></th>
+                    <th><a style="cursor:pointer" onclick="ShowDetailsBox('@evalType.A1')">B1-Independant</a></th>
+                    <th><a style="cursor:pointer" onclick="ShowDetailsBox('@evalType.A1')">B2-Independant</a></th>
+                    <th><a style="cursor:pointer" onclick="ShowDetailsBox('@evalType.A1')">C1-Extraordinary</a></th>
+                    <th><a style="cursor:pointer" onclick="ShowDetailsBox('@evalType.A1')">C2-Extraordinary</a></th>
+                </tr>
+                var eval = studentEvals.FirstOrDefault(x => x.EvaluationTypeId == evalType.Id);
+                <tr class="tblEvalsTR">
+                    <th>@evalType.Name @Html.HiddenFor(model => evalType.Id)</th>
+                    @if (ViewBag.IsPDF == true)
+                    {
+                        if (eval != null)
+                        {
+                            if (eval.A1.Value)
+                            {
+                                <td><label>Y</label></td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            if (eval.A2.Value)
+                            {
+                                <td><label>Y</label></td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            if (eval.B1.Value)
+                            {
+                                <td><label>Y</label></td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            if (eval.B2.Value)
+                            {
+                                <td><label>Y</label></td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            if (eval.C1.Value)
+                            {
+                                <td><label>Y</label></td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            if (eval.C2.Value)
+                            {
+                                <td><label>Y</label></td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                        }
+                        else
+                        {
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        }
+                    }
+                    else
+                    {
+                        if (eval != null)
+                        {
+                            <td>@Html.CheckBoxFor(model => eval.A1.Value, new { })</td>
+                            <td>@Html.CheckBoxFor(model => eval.A2.Value, new { })</td>
+                            <td>@Html.CheckBoxFor(model => eval.B1.Value, new { })</td>
+                            <td>@Html.CheckBoxFor(model => eval.B2.Value, new { })</td>
+                            <td>@Html.CheckBoxFor(model => eval.C1.Value, new { })</td>
+                            <td>@Html.CheckBoxFor(model => eval.C2.Value, new { })</td>
+                        }
+                        else
+                        {
+                            <td>@Html.CheckBox("chkCommon")</td>
+                            <td>@Html.CheckBox("chkCommon")</td>
+                            <td>@Html.CheckBox("chkCommon")</td>
+                            <td>@Html.CheckBox("chkCommon")</td>
+                            <td>@Html.CheckBox("chkCommon")</td>
+                            <td>@Html.CheckBox("chkCommon")</td>
+                        }
+                    }
+
+                </tr>
+            }
+        </table>
+        <br />
+        <label>Attendance: @ViewBag.Attendance %</label>
+        <br />
+        <br />
+        <label>
+            Effort:
+            <span class="starRating" style="margin-top:-15px;margin-left:5px;">
+                <input id="rating5" type="radio" name="rating" value="5" @(effort == 5 ? "checked" : "")>
+                <label for="rating5">5</label>
+                <input id="rating4" type="radio" name="rating" value="4" @(effort == 4 ? "checked" : "")>
+                <label for="rating4">4</label>
+                <input id="rating3" type="radio" name="rating" value="3" @(effort == 3 ? "checked" : "")>
+                <label for="rating3">3</label>
+                <input id="rating2" type="radio" name="rating" value="2" @(effort == 2 ? "checked" : "")>
+                <label for="rating2">2</label>
+                <input id="rating1" type="radio" name="rating" value="1" @(effort == 1 ? "checked" : "")>
+                <label for="rating1">1</label>
+            </span>
+        </label>
+        <br />
+        <br />
+
+        <label>Comments: </label>
+        <textarea class="form-control" id="txtComments" name="txtComments">@comments</textarea>
+        <br />
+        <br />
+        @if (ViewBag.IsPDF == false)
+        {
+            <input type="button" value="Save" class="btn btn-success" onclick="SaveStudentEvaluation(this)" />
+            @Html.ActionLink("Back to Evaluations", "Evaluation", "Exams", new { id = ViewBag.EID }, null)
+        }
+        else
+        {
+            <table>
+                <tr>
+                    <td><strong>A1 Details: </strong>Can understand familiar words and very basic phrases concerning himself, family and surrounding when people speak slowly and clearly</td>
+                </tr>
+                <tr>
+                    <td><strong>A2 Details: </strong>Phrases and highest frequency vocabulary related to areas of most immediate personal relevance eg very basic personal and family, shopping, local area, employment. Can catch the main point</td>
+                </tr>
+                <tr>
+                    <td><strong>B1 Details: </strong>Can understand familiar words and very basic phrases concerning himself, family and surrounding when people speak slowly and clearly</td>
+                </tr>
+                <tr>
+                    <td><strong>B2 Details: </strong>Phrases and highest frequency vocabulary related to areas of most immediate personal relevance eg very basic personal and family, shopping, local area, employment. Can catch the main point in short, clear, simple messages and announcements short, clear, simple messages and announcements</td>
+                </tr>
+                <tr>
+                    <td><strong>C1 Details: </strong>Can understand familiar words and very basic phrases concerning himself, family and surrounding when people speak slowly and clearly</td>
+                </tr>
+                <tr>
+                    <td><strong>C2 Details: </strong>Phrases and highest frequency vocabulary related to areas of most immediate personal relevance eg very basic personal and family, shopping, local area, employment. Can catch the main point in short, clear, simple messages and announcements short, clear, simple messages and announcements</td>
+                </tr>
+            </table>
+        }
+
+        <script type="text/javascript">
+            function ShowDetailsBox(data)
+            {
+                alert(data);
+            }
+            function SaveStudentEvaluation(pointer) {
+                var rating = $('input[name=rating]:checked').val();
+                var comments = $('textarea#txtComments').val();
+                var qq = "";
+                $(".tblEvalsTR").each(function () {
+                    var cid = $(this).find("input[type='hidden']").eq(0).val();
+                    var checkBoxes = $(this).find("input[type='checkbox']");
+                    var q = "";
+                    checkBoxes.each(function () {
+                        q += "," + (this.checked ? 1 : 0);
+                    });
+                    qq += ":" + cid + ',' + q;
+                });
+                var url = "/Exams/SaveStudentEvaluation?q=" + qq + "&eid=" + @ViewBag.EID + "&sid=" + @ViewBag.SID + "&rating=" + rating + "&comments=" + comments;
+                $.ajax({
+                    url: url, async: false, dataType: 'json', success: function (result) {
+                        if(result.done == 1)
+                        {
+                            ShowSuccessMessage(result.data)
+                            window.location.href = "/Exams/Evaluation?id=" + @ViewBag.EID;
+                        }
+                        else
+                        {
+                            alert(result.data);
+                        }
+                    }
+                });
+            }
+            function ShowSuccessMessage(msg) {
+                $("#SuccessAlert").html(msg);
+                $("#SuccessAlert").show();
+                setTimeout(function () {
+                    $('#SuccessAlert').hide();
+                }, 2000);
+            }
+        </script>
+    </div>
+</div>

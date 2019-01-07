@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "BarChart";
+    Layout = null;
+}
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<div>
+    <div id="barchart" style="width: 900px; height: 500px;"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        google.load("visualization", "1.1", { packages: ["bar"] });
+        drawBarChart();
+
+        function drawBarChart() {
+
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                url: '/UserMan/GetBarChartData',
+                dataType: "json",
+                success: function (barChartData) {
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Month');
+                    data.addColumn('number', 'Initiated Classes');
+                    data.addColumn('number', 'Completed Classes');
+                    data.addColumn('number', 'Students Enrolled');
+                    $.each(barChartData, function (i, d) {
+                        data.addRow([barChartData[i].Label, barChartData[i].Value1, barChartData[i].Value2, barChartData[i].Value3]);
+                    });
+                    var options = {
+                        chart: {
+                            title: 'Classes/Students Last Year Data',
+                            subtitle: 'Initiated Classes, Completed Classes, and Enrolled Students'
+                        },
+                        bars: 'vertical'
+                    };
+                    var chart = new google.charts.Bar(document.getElementById('barchart'));
+                    chart.draw(data, options);
+                },
+                error: function (data) {
+                    alert("Error In getting Records");
+                }
+            });
+        }
+    });
+</script>

@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GreenLightFeaturesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="GreenLightFeaturesModelStoreContainer">
+    <EntitySet Name="AspNetRoles" EntityType="GreenLightFeaturesModel.Store.AspNetRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUserClaims" EntityType="GreenLightFeaturesModel.Store.AspNetUserClaims" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUserLogins" EntityType="GreenLightFeaturesModel.Store.AspNetUserLogins" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUserRoles" EntityType="GreenLightFeaturesModel.Store.AspNetUserRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUsers" EntityType="GreenLightFeaturesModel.Store.AspNetUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Attachment" EntityType="GreenLightFeaturesModel.Store.Attachment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Attendance" EntityType="GreenLightFeaturesModel.Store.Attendance" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CMSPage" EntityType="GreenLightFeaturesModel.Store.CMSPage" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Course" EntityType="GreenLightFeaturesModel.Store.Course" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CourseClass" EntityType="GreenLightFeaturesModel.Store.CourseClass" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Evaluation" EntityType="GreenLightFeaturesModel.Store.Evaluation" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Exam" EntityType="GreenLightFeaturesModel.Store.Exam" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ExamQuestion" EntityType="GreenLightFeaturesModel.Store.ExamQuestion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ExamType" EntityType="GreenLightFeaturesModel.Store.ExamType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="News" EntityType="GreenLightFeaturesModel.Store.News" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Question" EntityType="GreenLightFeaturesModel.Store.Question" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TrainingBase" EntityType="GreenLightFeaturesModel.Store.TrainingBase" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EvaluationTypeSet" EntityType="GreenLightFeaturesModel.Store.EvaluationTypeSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles" Association="GreenLightFeaturesModel.Store.FK_AspNetUserRoles_AspNetRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="GreenLightFeaturesModel.Store.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="GreenLightFeaturesModel.Store.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUserRoles_AspNetUsers" Association="GreenLightFeaturesModel.Store.FK_AspNetUserRoles_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseClassAttendance" Association="GreenLightFeaturesModel.Store.FK_CourseClassAttendance">
+      <End Role="CourseClass" EntitySet="CourseClass" />
+      <End Role="Attendance" EntitySet="Attendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Questions_Courses" Association="GreenLightFeaturesModel.Store.FK_Questions_Courses">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Question" EntitySet="Question" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserCourses_Courses" Association="GreenLightFeaturesModel.Store.FK_UserCourses_Courses">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="CourseClass" EntitySet="CourseClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserCourseTrainingBase" Association="GreenLightFeaturesModel.Store.FK_UserCourseTrainingBase">
+      <End Role="TrainingBase" EntitySet="TrainingBase" />
+      <End Role="CourseClass" EntitySet="CourseClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Grade_ToTest" Association="GreenLightFeaturesModel.Store.FK_Grade_ToTest">
+      <End Role="Exam" EntitySet="Exam" />
+      <End Role="Evaluation" EntitySet="Evaluation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Test_ToTestType" Association="GreenLightFeaturesModel.Store.FK_Test_ToTestType">
+      <End Role="ExamType" EntitySet="ExamType" />
+      <End Role="Exam" EntitySet="Exam" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestQuestions_ToTest" Association="GreenLightFeaturesModel.Store.FK_TestQuestions_ToTest">
+      <End Role="Exam" EntitySet="Exam" />
+      <End Role="ExamQuestion" EntitySet="ExamQuestion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestQuestions_ToQuestion" Association="GreenLightFeaturesModel.Store.FK_TestQuestions_ToQuestion">
+      <End Role="Question" EntitySet="Question" />
+      <End Role="ExamQuestion" EntitySet="ExamQuestion" />
+    </AssociationSet>
+    <AssociationSet Name="AttachmentCourseClass" Association="GreenLightFeaturesModel.Store.AttachmentCourseClass">
+      <End Role="Attachment" EntitySet="Attachment" />
+      <End Role="CourseClass" EntitySet="CourseClass" />
+    </AssociationSet>
+    <AssociationSet Name="ExamCourseClass" Association="GreenLightFeaturesModel.Store.ExamCourseClass">
+      <End Role="Exam" EntitySet="Exam" />
+      <End Role="CourseClass" EntitySet="CourseClass" />
+    </AssociationSet>
+    <AssociationSet Name="EvaluationEvaluationType" Association="GreenLightFeaturesModel.Store.EvaluationEvaluationType">
+      <End Role="Evaluation" EntitySet="Evaluation" />
+      <End Role="EvaluationType" EntitySet="EvaluationTypeSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="ClaimType" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="ProviderKey" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="FullName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DateOfBirth" Type="datetime" Nullable="true" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Photo" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" Nullable="true" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsAttendanceAuthorized" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="Status" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="CVPath" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Attachment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar(max)" Nullable="false" />
+    <Property Name="FilePath" Type="varchar" Nullable="false" MaxLength="516" />
+    <Property Name="PubDate" Type="datetime" Nullable="false" />
+    <Property Name="Order" Type="int" Nullable="false" />
+    <Property Name="CourseClassId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Attendance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentIds" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AttendanceDate" Type="datetime" Nullable="false" />
+    <Property Name="isHoliday" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="isAllPresent" Type="bit" Nullable="false" />
+    <Property Name="CourseClassId" Type="int" Nullable="false" />
+    <Property Name="IsInstructorPresent" Type="bit" Nullable="false" DefaultValue="false" />
+  </EntityType>
+  <EntityType Name="CMSPage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Body" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="Description" Type="varchar(max)" Nullable="true" />
+    <Property Name="IsPublished" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CourseClass">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TrainingBaseId" Type="int" Nullable="false" />
+    <Property Name="CourseId" Type="int" Nullable="false" />
+    <Property Name="InstructorId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="AddedDate" Type="datetime" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="StartTime" Type="time" Nullable="false" Precision="7" />
+    <Property Name="EndTime" Type="time" Nullable="false" Precision="7" />
+    <Property Name="StudentIds" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ClassDates" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Evaluation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentId" Type="int" Nullable="false" />
+    <Property Name="ExamId" Type="int" Nullable="false" />
+    <Property Name="Grade" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ExamDate" Type="datetime" Nullable="false" />
+    <Property Name="EvaluationTypeId" Type="int" Nullable="false" />
+    <Property Name="IsStudentEvaluation" Type="bit" Nullable="false" />
+    <Property Name="Efforts" Type="int" Nullable="true" />
+    <Property Name="Comments" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="A1" Type="bit" Nullable="true" />
+    <Property Name="A2" Type="bit" Nullable="true" />
+    <Property Name="B1" Type="bit" Nullable="true" />
+    <Property Name="B2" Type="bit" Nullable="true" />
+    <Property Name="C1" Type="bit" Nullable="true" />
+    <Property Name="C2" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" Nullable="false" MaxLength="256" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+    <Property Name="IsPublished" Type="bit" Nullable="false" />
+    <Property Name="ExamTypeId" Type="int" Nullable="false" />
+    <Property Name="MaxGrade" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CourseClassId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ExamQuestion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExamId" Type="int" Nullable="false" />
+    <Property Name="QuestionId" Type="int" Nullable="false" />
+    <Property Name="OrderId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ExamType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="varchar" Nullable="false" MaxLength="128" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" Nullable="true" MaxLength="516" />
+    <Property Name="PubDate" Type="datetime" Nullable="true" />
+    <Property Name="Details" Type="varchar(max)" Nullable="true" />
+    <Property Name="Audience" Type="int" Nullable="false" />
+    <Property Name="ClassId" Type="int" Nullable="true" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuestionText" Type="varchar" Nullable="false" MaxLength="516" />
+    <Property Name="Option1" Type="varchar" Nullable="false" MaxLength="516" />
+    <Property Name="Option2" Type="varchar" Nullable="false" MaxLength="516" />
+    <Property Name="Option3" Type="varchar" Nullable="true" MaxLength="516" />
+    <Property Name="Option4" Type="varchar" Nullable="true" MaxLength="516" />
+    <Property Name="CorrectAnswer" Type="int" Nullable="false" />
+    <Property Name="AnswerData" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CourseId" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TrainingBase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ContactDetail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Latitude" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Longitude" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="EvaluationTypeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="A1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="A2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="B1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="B2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="C1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="C2" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AspNetUserRoles_AspNetRoles">
+    <End Role="AspNetRoles" Type="GreenLightFeaturesModel.Store.AspNetRoles" Multiplicity="1" />
+    <End Role="AspNetUserRoles" Type="GreenLightFeaturesModel.Store.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="GreenLightFeaturesModel.Store.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="GreenLightFeaturesModel.Store.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="GreenLightFeaturesModel.Store.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="GreenLightFeaturesModel.Store.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUserRoles_AspNetUsers">
+    <End Role="AspNetUsers" Type="GreenLightFeaturesModel.Store.AspNetUsers" Multiplicity="1" />
+    <End Role="AspNetUserRoles" Type="GreenLightFeaturesModel.Store.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseClassAttendance">
+    <End Role="CourseClass" Type="GreenLightFeaturesModel.Store.CourseClass" Multiplicity="1" />
+    <End Role="Attendance" Type="GreenLightFeaturesModel.Store.Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CourseClass">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="CourseClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Questions_Courses">
+    <End Role="Course" Type="GreenLightFeaturesModel.Store.Course" Multiplicity="1" />
+    <End Role="Question" Type="GreenLightFeaturesModel.Store.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserCourses_Courses">
+    <End Role="Course" Type="GreenLightFeaturesModel.Store.Course" Multiplicity="1" />
+    <End Role="CourseClass" Type="GreenLightFeaturesModel.Store.CourseClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseClass">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserCourseTrainingBase">
+    <End Role="TrainingBase" Type="GreenLightFeaturesModel.Store.TrainingBase" Multiplicity="1" />
+    <End Role="CourseClass" Type="GreenLightFeaturesModel.Store.CourseClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrainingBase">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseClass">
+        <PropertyRef Name="TrainingBaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Grade_ToTest">
+    <End Role="Exam" Type="GreenLightFeaturesModel.Store.Exam" Multiplicity="1" />
+    <End Role="Evaluation" Type="GreenLightFeaturesModel.Store.Evaluation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exam">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Evaluation">
+        <PropertyRef Name="ExamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Test_ToTestType">
+    <End Role="ExamType" Type="GreenLightFeaturesModel.Store.ExamType" Multiplicity="1" />
+    <End Role="Exam" Type="GreenLightFeaturesModel.Store.Exam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExamType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Exam">
+        <PropertyRef Name="ExamTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestQuestions_ToTest">
+    <End Role="Exam" Type="GreenLightFeaturesModel.Store.Exam" Multiplicity="1" />
+    <End Role="ExamQuestion" Type="GreenLightFeaturesModel.Store.ExamQuestion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exam">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExamQuestion">
+        <PropertyRef Name="ExamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestQuestions_ToQuestion">
+    <End Role="Question" Type="GreenLightFeaturesModel.Store.Question" Multiplicity="1" />
+    <End Role="ExamQuestion" Type="GreenLightFeaturesModel.Store.ExamQuestion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExamQuestion">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AttachmentCourseClass">
+    <End Role="Attachment" Type="GreenLightFeaturesModel.Store.Attachment" Multiplicity="*" />
+    <End Role="CourseClass" Type="GreenLightFeaturesModel.Store.CourseClass" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="CourseClass">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Attachment">
+        <PropertyRef Name="CourseClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExamCourseClass">
+    <End Role="Exam" Type="GreenLightFeaturesModel.Store.Exam" Multiplicity="*" />
+    <End Role="CourseClass" Type="GreenLightFeaturesModel.Store.CourseClass" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="CourseClass">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Exam">
+        <PropertyRef Name="CourseClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EvaluationEvaluationType">
+    <End Role="Evaluation" Type="GreenLightFeaturesModel.Store.Evaluation" Multiplicity="*" />
+    <End Role="EvaluationType" Type="GreenLightFeaturesModel.Store.EvaluationTypeSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="EvaluationType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Evaluation">
+        <PropertyRef Name="EvaluationTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

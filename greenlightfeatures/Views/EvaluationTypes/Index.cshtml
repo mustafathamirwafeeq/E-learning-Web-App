@@ -1,0 +1,83 @@
+﻿@model IEnumerable<ELearning.Models.EvaluationType>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.A1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.A2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.B1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.B2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.C1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.C2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.A1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.A2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.B1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.B2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.C1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.C2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+﻿@model ELearning.Models.Question
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.QuestionText)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.QuestionText)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Option1)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Option1)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Option2)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Option2)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Option3)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Option3)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Option4)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Option4)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CorrectAnswer)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CorrectAnswer)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AnswerData)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AnswerData)
+                </dd>
+
+                <dt>
+                    Course
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Cours.Title)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+</div>

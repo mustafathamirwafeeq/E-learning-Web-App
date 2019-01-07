@@ -1,0 +1,79 @@
+﻿<ul class="nav navbar-nav side-nav">
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#News"><i class="fa fa-caret-square-o-down"></i> Announcement <i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="News" class="collapse">
+            <li>
+                <a href="/News/Create/">Add Announcement</a>
+            </li>
+            <li>
+                <a href="/News/Index/">Manage Announcements</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#Classes"><i class="fa fa-caret-square-o-down"></i> Classes<i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="Classes" class="collapse">
+            <li>
+                <a href="/CourseClasses/Index?id=@ELearning.Models.Utilities.GetCurrentUserId()">My Classes</a>
+            </li>
+            @if (ELearning.Models.Utilities.IsInstructorAttendanceAuthorized())
+            {
+                <li>
+                    <a href="/Attendance/MarkInstructorAttendance">Instructor Attendance</a>
+                </li>
+            }
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#Attachments"><i class="fa fa-caret-square-o-down"></i> Attachments <i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="Attachments" class="collapse">
+            <li>
+                <a href="/Attachments/Create/">Add Attachment</a>
+            </li>
+            <li>
+                <a href="/Attachments/Index/">Manage Attachments</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#Exams"><i class="fa fa-caret-square-o-down"></i> Exams <i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="Exams" class="collapse">
+            <li>
+                <a href="/ExamTypes/Create/">Add Exam Type</a>
+            </li>
+            <li>
+                <a href="/ExamTypes/Index/">Manage Exam Types</a>
+            </li>
+            <li>
+                <a href="/Exams/Create/">Add Exam</a>
+            </li>
+            <li>
+                <a href="/Exams/Index/">Manage Exams</a>
+            </li>
+            @*<li>
+                <a href="/Questions/AddQuestions/">Add Questions</a>
+            </li>*@
+            @*<li>
+                <a href="/Questions/Index/">Manage Questions</a>
+            </li>*@
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#Reports"><i class="fa fa-caret-square-o-down"></i> Reports <i class="fa fa-fw fa-caret-down"></i></a>
+        <ul id="Reports" class="collapse">
+            <li>
+                <a href="/News/Index/">List of Announcements</a>
+            </li>
+            <li>
+                <a href="/CourseClasses/Index?id=@ELearning.Models.Utilities.GetCurrentUserId()">List of Classes</a>
+            </li>
+            <li>
+                <a href="/Reports/AttendanceDetails/">Class Attendance Details</a>
+            </li>
+            <li>
+                <a href="/Reports/StudentAttendanceDetails/">Student Attendance Details</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+

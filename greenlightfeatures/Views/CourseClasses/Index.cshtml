@@ -1,0 +1,224 @@
+﻿@model IEnumerable<ELearning.Models.CourseClass>
+
+@{
+    ViewBag.Title = "List of Classes";
+    if (ViewBag.IsPDF == true)
+    {
+        Layout = "~/Views/Shared/_PDFLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Dashboard.cshtml";
+    }
+    int counter = 1;
+}
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+        @if (ViewBag.IsPDF == false)
+        {
+            @Html.ActionLink("Download as PDF", "ListOfClassesPDF", new { isPDF = true }, new { @class = "btn btn-success" })
+        }
+        <br />
+        <br />
+
+        @if (ViewBag.ID == 0)
+        {
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+        }
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>
+                    Base
+                </th>
+                <th>
+                    Class
+                </th>
+                <th>
+                    Instructor
+                </th>
+                <th>
+                    Students
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    Class Status
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AddedDate)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(counter++)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrainingBase.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @(ELearning.Models.Utilities.GetInstance().GetUserFullName(item.InstructorId))
+                    </td>
+                    <td>
+                        <a href="#" onclick="ShowStudents(@item.Id)">@(item.StudentIds.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Count())</a>
+                    </td>
+                    <td>
+                        @(item.StartDate.ToString("dd/MM/yyyy"))
+                    </td>
+                    <td>
+                        @(item.EndDate.ToString("dd/MM/yyyy"))
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndTime)
+                    </td>
+                    @if (item.Status)
+                    {
+                        <td>
+                            <label class="label label-success">Active</label>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <label class="label label-danger">Disabled</label>
+                        </td>
+                    }
+                    @if (item.StartDate < DateTime.Now && item.EndDate < DateTime.Now)
+                    {
+                        <td>
+                            <label class="label label-primary">Completed</label>
+                        </td>
+                    }
+                    else if (item.StartDate < DateTime.Now && item.EndDate > DateTime.Now)
+                    {
+                        <td>
+                            <label class="label label-success">Started</label>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <label class="label label-danger">Pending</label>
+                        </td>
+                    }
+                    <td>
+                        @item.AddedDate.ToString("dd/MM/yyyy")
+                    </td>
+                    @if (ViewBag.IsPDF == false)
+                    {
+                        if (ViewBag.ID == 0)
+                        {
+                            if (item.Status && item.EndDate > DateTime.Now)
+                            {
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                                    @Html.ActionLink("Schedule Classes", "SetClassDates", new { id = item.Id, isHolidays = true, isWeekHolidays = false }) |
+                                    @Html.ActionLink("Add Students", "AddStudents", new { id = item.Id })
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                </td>
+                            }
+                        }
+                        else
+                        {
+                            if (item.EndDate > DateTime.Now)
+                            {
+                                if (User.IsInRole("Student"))
+                                {
+                                    <td>
+                                        @Html.ActionLink("Attendance", "StudentIndex", "Attendance", new { id = item.Id }, null)
+                                    </td>
+                                }
+                                else
+                                {
+                                    if (item.Status)
+                                    {
+                                        <td>
+                                            @Html.ActionLink("Add Students", "AddStudents", new { id = item.Id }) |
+                                            @Html.ActionLink("Attendance", "Index", "Attendance", new { id = item.Id }, null)
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @Html.ActionLink("Attendance", "Index", "Attendance", new { id = item.Id }, null)
+                                        </td>
+                                    }
+
+                                }
+                            }
+
+                        }
+                    }
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+<div id="dialog" title="Basic dialog">
+</div>
+<script>
+    function ShowStudents(id) {
+        //Do ajax call
+        $.ajax({
+            type: 'GET',
+            url: "@Url.Content("/CourseClasses/GetStudentNames/")",
+            data: {
+                id: id//Data need to pass as parameter
+            },
+            dataType: 'html', //dataType - html
+            success: function (result) {
+                //Create a Div around the Partial View and fill the result
+                $('#dialog').html(result);
+            }
+        });
+
+        $("#dialog").dialog("open");
+    }
+    $(function () {
+        $("#dialog").dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "explode",
+                duration: 1000
+            }
+        });
+    });
+</script>

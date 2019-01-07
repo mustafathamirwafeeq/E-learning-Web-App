@@ -1,0 +1,44 @@
+﻿@model ELearning.Models.Dto.BaseDetail
+@{
+    ViewBag.Title = "BarChartForBase";
+    Layout = null;
+}
+
+<script src="~/Scripts/jsAPI.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['bar']}]}"></script>
+<div id="barchartForBase" style="height: 400px;"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        drawBarChartForBase();
+        function drawBarChartForBase() {
+
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                url: '/UserMan/GetBarChartDataForBase',
+                data:{id:@ViewBag.ID},
+                dataType: "json",
+                success: function (barChartData) {
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Classes');
+                    data.addColumn('number', 'Students');
+                    $.each(barChartData, function (i, d) {
+                        data.addRow([barChartData[i].Label, barChartData[i].Value1]);
+                    });
+                    var options = {
+                        chart: {
+                            title: 'Students Statistics on the Base',
+                            subtitle: ''
+                        },
+                        bars: 'vertical'
+                    };
+                    var chart = new google.charts.Bar(document.getElementById('barchartForBase'));
+                    chart.draw(data, options);
+                },
+                error: function (data) {
+                    alert("Error In getting Records");
+                }
+            });
+        }
+    });
+</script>

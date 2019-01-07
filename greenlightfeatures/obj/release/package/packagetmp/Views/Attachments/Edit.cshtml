@@ -1,0 +1,120 @@
+﻿@model ELearning.Models.Attachment
+
+@{
+    ViewBag.Title = "Edit Attachment";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+@section Styles
+{
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+}
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <input type="hidden" id="UploadPath" value="@System.Configuration.ConfigurationManager.AppSettings["AttachmentsUploadPath"]" />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FilePath, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+
+                        <input type="file" id="fileupload" name="fileupload" accept="image/*" multiple="multiple" />
+                        <input type="hidden" name="FilePath" id="FilePath" value="@Model.FilePath" />
+                        <img style="display:none" id="imgUploadProgress" src="~/Images/ajax-process.gif" />
+
+                        <a id="ViewFile" name="ViewFile" href="@Model.FilePath" title="@Model.Title" target="_blank">View File</a>
+                        @Html.ValidationMessageFor(model => model.FilePath, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PubDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBox("PubDate", Model.PubDate.ToString("MMMM dd, yyyy hh:mm:ss tt"), new { @class = "form-control text-box single-line" })
+                        @Html.ValidationMessageFor(model => model.PubDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Order, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Order, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Order, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CourseClassId, "CourseClassId", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("CourseClassId", (SelectList)ViewBag.CourseList, "Select Class", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CourseClassId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-primary disabled" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.9.2.js"></script>
+    <script src="~/Scripts/FileUpload/jquery.fileupload.js"></script>
+    <script src="~/Scripts/FileUpload/jquery.iframe-transport.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#PubDate').datetimepicker({ format: 'LLL' });
+            $('#PubDate').data("DateTimePicker").date($("#PubDate").val());
+
+            $('#fileupload').fileupload({
+                dataType: "json",
+                url: "/api/upload?uploadPath=" + $("#UploadPath").val(),
+                add: function (e, data) {
+                    data.submit();
+                },
+                start: function (e) {
+                    $(".btn-primary").addClass("disabled");
+                    $("#imgUploadProgress").show();
+                },
+                done: function (e, data) {
+                    $("#ViewFile").attr("href", "/CourseAttachments/" + data.result.name);
+                    $("#FilePath").val("/CourseAttachments/" + data.result.name);
+                    $("#ViewFile").removeAttr("style");
+                    $(".btn-primary").removeClass("disabled");
+                    $("#imgUploadProgress").hide();
+                },
+                progressall: function (e, data) {
+                }
+            });
+        });
+    </script>
+}
+

@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "ClassSchedule";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>Select Class and Student for Attendance Details</h4>
+    </div>
+    <div class="panel panel-body">
+        <label>Class</label>
+        @Html.DropDownList("ClassId", (SelectList)ViewBag.CourseClasses, new { @onChange="ShowStudents()"})
+        @if (ViewBag.CID != 0)
+        {
+            <label>Student</label>
+            @Html.DropDownList("StudentId", (SelectList)ViewBag.Students)
+        }
+        <button class="btn btn-success" onclick="GoToStudentAttendanceDetails()">Download as PDF</button>
+    </div>
+</div>
+<script type="text/javascript">
+    var urlStudentAttendanceDetails = '@Url.Action("StudentAttendancePDF", "Attendance")';
+    var urlStudentAttendanceDetails1 = '@Url.Action("StudentAttendanceDetails", "Reports")';
+    function GoToStudentAttendanceDetails() {
+        var id = $("#ClassId").val();
+        var sid = $("#StudentId").val();
+        if (id == null || id == '' || id == undefined) {
+            alert('Please select class first.');
+        }
+        else if (sid == null || sid == '' || sid == undefined) {
+            alert('Please select student first.');
+        }
+        else {
+            window.location.href = urlStudentAttendanceDetails + "?id=" + id + "&sid=" + sid;
+        }
+    }
+    function ShowStudents() {
+        var id = $("#ClassId").val();
+        $("#StudentId").hide();
+        window.location.href = urlStudentAttendanceDetails1 + "?cid=" + id;
+    }
+</script>

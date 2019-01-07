@@ -1,0 +1,203 @@
+﻿@model ELearning.Models.Question
+
+@{
+    ViewBag.Title = "Add Questions";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-success alert-dismissible" role="alert" style="display: none;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span id="alert-message">Sucess</span>
+        </div>
+        <h2>@ViewBag.CourseTitle<small> @ViewBag.DepartmentTitle</small></h2>
+        @{Html.EnableClientValidation(true);}
+        @using (Html.BeginForm())
+        {
+            <input type="hidden" name="UserId" id="UserId" value="@ViewBag.UserId" />
+            <input type="hidden" name="CourseId" id="CourseId" value="@ViewBag.CourseId" />
+            <input type="hidden" name="IsDeleted" id="IsDeleted" value="false" />
+
+            <div class="form-inline" id="formDiv">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+               
+
+                <div id="QuestionForm" class="formSepDiv">
+                    <a href="javascript:void(0);" onclick="closebtnClick(this);" class="pull-right" ><i class="fa fa-times"></i></a>
+                    <div class="row question">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.QuestionText)
+                                <span class="text-danger" >*</span>
+                                @Html.EditorFor(model => model.QuestionText, new { htmlAttributes = new { @class = "form-control QuestionText" } })
+                                @Html.ValidationMessageFor(model => model.QuestionText, "", new { @class = "text-danger" })
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row question">
+
+                        <div class="form-group">
+                            <div class="col-lg-3">
+                                @Html.LabelFor(model => model.Option1)
+                                <span class="text-danger">*</span>
+                                @Html.EditorFor(model => model.Option1, new { htmlAttributes = new { @class = "form-control Option1" } })
+                                @Html.ValidationMessageFor(model => model.Option1, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="col-lg-3">
+
+                                @Html.LabelFor(model => model.Option2)
+                                <span class="text-danger">*</span>
+                                @Html.EditorFor(model => model.Option2, new { htmlAttributes = new { @class = "form-control Option2" } })
+                                @Html.ValidationMessageFor(model => model.Option2, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="col-lg-3">
+
+                                @Html.LabelFor(model => model.Option3)
+
+                                @Html.EditorFor(model => model.Option3, new { htmlAttributes = new { @class = "form-control Option3" } })
+                                @Html.ValidationMessageFor(model => model.Option3, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="col-lg-3">
+
+                                @Html.LabelFor(model => model.Option4)
+
+                                @Html.EditorFor(model => model.Option4, new { htmlAttributes = new { @class = "form-control Option4" } })
+                                @Html.ValidationMessageFor(model => model.Option4, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row question">
+                        <div class="form-group">
+                            <div class="col-lg-6">
+                                @Html.LabelFor(model => model.CorrectAnswer)
+                                <span class="text-danger">*</span>
+                                @Html.EditorFor(model => model.CorrectAnswer, new { htmlAttributes = new { @class = "form-control CorrectAnswer",@min="1",@max="4" } })
+                                @*<select name="CorrectAnswer" id="CorrectAnswer" class="form-control">
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                    <option value="4">Option 4</option>
+                                </select>*@
+                                @Html.ValidationMessageFor(model => model.CorrectAnswer, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="col-lg-6">
+                                @Html.LabelFor(model => model.AnswerData)
+                                <span class="text-danger">*</span>
+                                @Html.EditorFor(model => model.AnswerData, new { htmlAttributes = new { @class = "form-control AnswerData" } })
+                                @Html.ValidationMessageFor(model => model.AnswerData, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <input class="btn btn-success btn-large" type="submit" id="btnSaveQuestions" value="Save Questions" />
+                    <input type="button" id="addNewFormBtn" class="btn btn-large" value="Add New Question" />
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/my-script.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //jquery validation
+            //$('form').validationEngine();
+
+            //Add new Form on add new button click
+            $("#addNewFormBtn").click(function () {
+                //alert($("#formDiv").html());
+                var formHtml = '<div class="formSepDiv" id="QuestionForm"> <a onclick="closebtnClick(this);" href="javascript:void(0);" class="pull-right" ><i class="fa fa-times"></i></a> <div class="row question"> <div class="col-lg-12"> <div class="form-group"> <label for="QuestionText">QuestionText</label> <span class="text-danger" >*</span> <input type="text" value="" name="QuestionText" id="QuestionText" data-val-required="The QuestionText field is required." data-val="true" class="form-control QuestionText text-box single-line"> <span data-valmsg-replace="true" data-valmsg-for="QuestionText" class="field-validation-valid text-danger"></span> </div> </div> </div> <div class="row question"> <div class="form-group"> <div class="col-lg-3"> <label for="Option1">Option1</label> <span class="text-danger" >*</span> <input type="text" value="" name="Option1" id="Option1" data-val-required="The Option1 field is required." data-val="true" class="form-control Option1 text-box single-line"> <span data-valmsg-replace="true" data-valmsg-for="Option1" class="field-validation-valid text-danger"></span> </div> <div class="col-lg-3"> <label for="Option2">Option2</label> <span class="text-danger" >*</span> <input type="text" value="" name="Option2" id="Option2" data-val-required="The Option2 field is required." data-val="true" class="form-control Option2 text-box single-line"> <span data-valmsg-replace="true" data-valmsg-for="Option2" class="field-validation-valid text-danger"></span> </div> <div class="col-lg-3"> <label for="Option3">Option3</label> <input type="text" value="" name="Option3" id="Option3" class="form-control Option3 text-box single-line"> <span data-valmsg-replace="true" data-valmsg-for="Option3" class="field-validation-valid text-danger"></span> </div> <div class="col-lg-3"> <label for="Option4">Option4</label> <input type="text" value="" name="Option4" id="Option4" class="form-control Option4 text-box single-line"> <span data-valmsg-replace="true" data-valmsg-for="Option4" class="field-validation-valid text-danger"></span> </div> </div> </div> <div class="row question"> <div class="form-group"> <div class="col-lg-6"><label for="CorrectAnswer">CorrectAnswer</label> <span class="text-danger" >*</span> <input type="number" min="1" max="4" name="CorrectAnswer" id="CorrectAnswer" data-val-required="The CorrectAnswer field is required." data-val-number="The field CorrectAnswer must be a number." data-val="true" class="form-control CorrectAnswer"/><span data-valmsg-replace="true" data-valmsg-for="CorrectAnswer" class="field-validation-valid text-danger"></span></div> <div class="col-lg-6"> <label for="AnswerData">AnswerData</label> <span class="text-danger" >*</span> <input type="text" value="" name="AnswerData" id="AnswerData" class="form-control AnswerData text-box single-line"> <span data-valmsg-replace="true" data-valmsg-for="AnswerData" class="field-validation-valid text-danger"></span> </div> </div> </div>';
+                $("#formDiv").append(formHtml);
+                checkIfAnyFormExist();
+            });
+
+            //button save all artist handler
+            $("#btnSaveQuestions").on("click", function (event) {
+                $('form').validate();
+                if (!$('form').valid()) {
+                    return;
+                }
+                event.preventDefault();
+                //Create a list of Artists.
+                var QuestionList = [];
+
+                $(".formSepDiv").each(function (i, obj) {
+                    //alert("Artist Name : " + $(obj).find(".artistName").val() + "\n Spot Light Status : " + $(obj).find(".artistisSpotLight").is(":checked") + "\n Artist DESC : " + $(obj).find(".artistDesc").val() + "\n Artist Status : " + $(obj).find(".artistStatus").is(":checked") + "\n Image : " + $(obj).find(".UploadImg").attr('src'));
+                    QuestionList.push({
+                        QuestionText: $(obj).find(".QuestionText").val(),
+                        Option1: $(obj).find(".Option1").val(),
+                        Option2: $(obj).find(".Option2").val(),
+                        Option3: $(obj).find(".Option3").val(),
+                        Option4: $(obj).find(".Option4").val(),
+                        CorrectAnswer: $(obj).find(".CorrectAnswer").val(),
+                        AnswerData: $(obj).find(".AnswerData").val(),
+                        UserId: $("#UserId").val(),
+                        CourseId: $("#CourseId").val(),
+                        IsDeleted: $("#IsDeleted").val()
+
+                    });
+                });
+
+                var URL = '@Url.Action("AddQuestions", "Questions")';
+                $.ajax({
+                    url: URL,
+                    type: 'post',
+                    traditional: true,
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(QuestionList),
+                    success: function (data) {
+                        if (data.Success)
+                        {
+                            ShowSuccessMessage(data.Message);
+                            window.location.reload();
+                        }
+                        else
+                        {
+                            ShowSuccessMessage(data.Message);
+                        }
+                        
+                    },
+                    error: function () {
+                        ShowSuccessMessage("Please Contact System Administrator");
+                    }
+                });
+            });
+        });
+
+        function closebtnClick(obj) {
+
+            clc = $(obj).parent().remove();
+            checkIfAnyFormExist();
+        }
+
+        function checkIfAnyFormExist() {
+            if ($('.formSepDiv').length > 0) {
+                $("#btnSaveQuestions").show();
+            }
+            else {
+                $("#btnSaveQuestions").hide();
+            }
+        }
+
+    </script>
+}

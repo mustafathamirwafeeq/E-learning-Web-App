@@ -1,0 +1,89 @@
+﻿@model IEnumerable<ELearning.Models.Exam>
+
+@{
+    ViewBag.Title = "Exams Listing";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>
+                    Course
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsPublished)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExamType.Type)
+                </th>
+                <th>
+                    Evaluation
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseClass.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsPublished)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExamType.Type)
+                    </td>
+                    <td>
+                        @{
+                int evalTypes = ELearning.Models.Utilities.GetInstance().GetEvaluationTypes();
+                int students = item.CourseClass.StudentIds.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Count();
+                int evals = evalTypes == 0 ? 0 : (item.Evaluation.Where(x=> !x.IsStudentEvaluation).Count() / evalTypes);
+                        }
+                        @if (evals == students)
+                        {
+                            <label class="label label-success">Completed</label>
+                        }
+                        else if (evals == 0)
+                        {
+                            <label class="label label-danger">Pending</label>
+                        }
+                        else if (evals < students)
+                        {
+                            <label class="label label-warning">Incompleted</label>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                        @Html.ActionLink("Evaluations", "Evaluation", new { id = item.Id })
+                        @*@Html.ActionLink("View Evaluation", "Evalution", new { id = item.Id })
+                            @if (!User.IsInRole("Admin"))
+                            {
+                                <span>|</span>
+                                @Html.ActionLink("Exam Questions", "ManageQuestions", new { examId = item.Id, courseId = item.CourseClassId })
+                            }*@
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

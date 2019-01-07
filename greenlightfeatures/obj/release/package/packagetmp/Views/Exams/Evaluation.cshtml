@@ -1,0 +1,99 @@
+﻿@model ELearning.Models.Dto.EvalutionDto
+@{
+    ViewBag.Title = "Evaluation";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+        <div id="SuccessAlert" class="alert alert-success" role="alert" style="display: none;"><span class="">Sucess</span></div>
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th></th>
+                @foreach (var evalType in Model.EvalTypes)
+                {
+                    <th>@evalType.Name</th>
+                }
+                <th>Average %</th>
+                <th></th>
+            </tr>
+            @foreach (var student in Model.Students.OrderBy(x => x.UserName))
+            {
+                <tr>
+                    <td>
+                        @student.FullName @Html.TextBox("eid", Model.Exam.Id, new { @style = "display:none" })
+                        @Html.TextBox("sid", student.UserId, new { @style = "display:none" })
+                    </td>
+                    @{
+                var studentEvals = Model.Exam.Evaluation.Where(x => x.StudentId == student.UserId && !x.IsStudentEvaluation).OrderBy(x => x.Id);
+                    }
+                    @if (studentEvals.Count() > 0)
+                    {
+                        List<double> averages = new List<double>();
+                        foreach (var evalType in Model.EvalTypes)
+                        {
+                            var eval = studentEvals.FirstOrDefault(x => x.EvaluationTypeId == evalType.Id);
+                            if (eval != null)
+                            {
+                                averages.Add(double.Parse(eval.Grade));
+                                <td>@Html.TextBoxFor(model => eval.Grade, new {@style="width:100px;", @class = "txtValues", @onkeyup = "EvaluateAverage(this)" })</td>
+                            }
+                            else
+                            {
+                                <td>@Html.TextBoxFor(model => evalType.Description, new { @style = "width:100px;", @class = "txtValues", @onkeyup = "EvaluateAverage(this)" })</td>
+                            }
+                        }
+                        <td><label class="lblAverage">@averages.Average().ToString("0.00")</label></td>
+                    }
+                    else
+                    {
+                        foreach (var evalType in Model.EvalTypes)
+                        {
+                            <td>@Html.TextBoxFor(model => evalType.Description, new { @style = "width:100px;", @class = "txtValues", @onkeyup = "EvaluateAverage(this)" })</td>
+                        }
+                        <td><label class="lblAverage"></label></td>
+                    }
+                    <td>
+                        <input type="button" value="Save" class="btn btn-success" onclick="SaveEvaluation(this)" />
+                        @Html.ActionLink("Evaluation", "DoStudentEvaluation", new { sid = student.UserId, eid = Model.Exam.Id }, new { @class = "btn btn-success" })
+                    </td>
+                </tr>
+            }
+        </table>
+        <script type="text/javascript">
+            function EvaluateAverage(pointer) {
+                var textBoxes = $(pointer).parent().parent().find(".txtValues");
+                var q = parseFloat(0);
+                var count = 0;
+                textBoxes.each(function () {
+                    if (this.value != '' && this.value != null && this.value != undefined)
+                        q += parseFloat(this.value);
+                    count++;
+                });
+                $(pointer).parent().parent().find(".lblAverage").html((q / count).toFixed(2));
+            }
+            function SaveEvaluation(pointer) {
+                var textBoxes = $(pointer).parent().parent().find("input[type='text']");
+                var q = "";
+                textBoxes.each(function () {
+                    q += "," + this.value;
+                });
+                var url = "/Exams/SaveEvaluation?q=" + q;
+                $.ajax({
+                    url: url, async: false, dataType: 'json', success: function (result) {
+                        ShowSuccessMessage(result.data)
+                    }
+                });
+            }
+            function ShowSuccessMessage(msg) {
+                $("#SuccessAlert").html(msg);
+                $("#SuccessAlert").show();
+                setTimeout(function () {
+                    $('#SuccessAlert').hide();
+                }, 2000);
+            }
+        </script>
+    </div>
+</div>

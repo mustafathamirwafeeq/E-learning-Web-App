@@ -1,0 +1,62 @@
+﻿@model ELearning.Models.Dto.ExamDto
+
+@{
+    ViewBag.Title = "Exam Evalution";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                Exam Type
+            </dt>
+            <dd>
+                @Model.ExamType
+            </dd>
+            <dt>
+                Exam
+            </dt>
+            <dd>
+                @Model.ExamTitle
+            </dd>
+            <dt>
+                Class
+            </dt>
+            <dd>
+                @Model.CoursTitle
+            </dd>
+        </dl>
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Exam Date</th>
+                <th>Grade</th>
+            </tr>
+            @foreach (var item in Model.Evalutions)
+            {
+                <tr>
+                    <td>
+                        @item.Username
+                    </td>
+                    <td>
+                        @item.FullName
+                    </td>
+                    <td>
+                        @item.ExamDate
+                    </td>
+                    <td>
+                        @item.Grade
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <p>@Html.ActionLink("Back to Exams", "Index", "Exams")</p>
+    </div>
+</div>
+

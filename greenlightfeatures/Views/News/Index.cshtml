@@ -1,0 +1,103 @@
+﻿@model IEnumerable<ELearning.Models.News>
+
+@{
+    ViewBag.Title = "List of Announcements";
+    if (ViewBag.IsPDF == true)
+    {
+        Layout = "~/Views/Shared/_PDFLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Dashboard.cshtml";
+    }
+    int counter = 1;
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+        @if (ViewBag.IsPDF == false)
+        {
+            @Html.ActionLink("Download as PDF", "ListOfNews", new { isPDF = true }, new { @class = "btn btn-success" })
+        }
+        <br />
+        <br />
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Details)
+                </th>
+                <th>
+                    Audience
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PubDate)
+                </th>
+                @if (ViewBag.IsPDF == false)
+                {
+                    <th></th>
+                }
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(counter++)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Details)
+                    </td>
+                    <td>
+                        @if (item.Audience == 1)
+                        {
+                            <label>Everyone</label>
+                        }
+                        else if (item.Audience == 2)
+                        {
+                            <label>All Instructors</label>
+                        }
+                        else if (item.Audience == 3)
+                        {
+                            <label>All Students</label>
+                        }
+                        else if (item.Audience == 4)
+                        {
+                            <label>Class: @(ELearning.Models.Utilities.GetInstance().GetClassByID(item.ClassId.Value).Title)</label>
+                        }
+                    </td>
+                    <td>
+                        @item.PubDate.Value.ToString("dd/MM/yyyy")
+                    </td>
+                    @if (ViewBag.IsPDF == false)
+                    {
+                        if (User.IsInRole("Admin") || ELearning.Models.Utilities.GetInstance().GetCurrentUserId() == item.CreatedBy)
+                        {
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                            </td>
+                        }
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+</script>

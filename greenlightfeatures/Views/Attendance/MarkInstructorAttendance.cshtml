@@ -1,0 +1,85 @@
+﻿@model IEnumerable<ELearning.Models.Dto.AttendanceDTO>
+@{
+    ViewBag.Title = "Instructor Attendance";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="panel-body">
+
+        <label>Please select Class from following list</label>
+        @Html.DropDownList("ClassID", null, new { @style = "width:20%;", @onchange = "LoadInstructorAttendance(this)" })
+
+        <table class="table table-responsive" style="margin-top:20px;">
+            <tr>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Day
+                </th>
+                <th>
+                    Instructor
+                </th>
+                <th>
+                    Taken At
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @(item.Date.ToShortDateString())
+                    </td>
+                    <td>
+                        @(item.Date.ToString("dddd"))
+                    </td>
+                    <td>
+                        @if (item.Attendance != null)
+                        {
+                            if (item.Attendance.IsInstructorPresent)
+                            {
+                                <label class="label label-success">Present</label>
+                            }
+                            else
+                            {
+                                <label class="label label-danger">Absent</label>
+                            }
+                        }
+                        else
+                        {
+                            <label class="label label-warning">Pending</label>
+                        }
+                    </td>
+                    <td>
+                        @(item.Attendance == null ? "" : item.Attendance.CreateDate.ToString())
+                    </td>
+                    @if (item.Attendance != null)
+                    {
+                        <td>
+                            @Html.ActionLink("Change", "ChangeInstructorAttendance", new { aid = item.Attendance.Id,cid=ViewBag.ID })
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.ActionLink("Create", "ChangeInstructorAttendance", new { aid = 0, cid = ViewBag.ID,date=item.Date })
+                        </td>
+                    }
+                </tr>
+            }
+
+        </table>
+    </div>
+    <script type="text/javascript">
+        function LoadInstructorAttendance(pointer) {
+            window.location.href = "/Attendance/MarkInstructorAttendance?id=" + $(pointer).val();
+        }
+    </script>
+</div>
+

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<ELearning.Models.AspNetUsers>
+<div style="overflow:auto; max-height:300px;">
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Student Name</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.UserId
+                </td>
+                <td>
+                    @item.FullName
+                </td>
+            </tr>
+        }
+    </table>
+</div>

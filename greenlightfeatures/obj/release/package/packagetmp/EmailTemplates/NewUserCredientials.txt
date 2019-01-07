@@ -1,0 +1,11 @@
+Dear <FullName>,<br/><br/>
+Your Account has been created on Green Light Features. Please login to use all the features of our website.<br/><br/>
+You can login to your account using following credientials.<br/>
+<strong>Username :</strong> <Username><br/>
+<strong>Password :</strong> <password><br/>
+For login to your account <a href="javascript:;" >Click here!</a>
+<br/>
+<br/>
+
+Regards,<br/>
+<regards>

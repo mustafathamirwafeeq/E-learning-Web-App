@@ -1,0 +1,147 @@
+﻿@model IEnumerable<ELearning.Models.Dto.ClassDate>
+
+@{
+    ViewBag.Title = "Index";
+    if (ViewBag.IsPDF == true)
+    {
+        Layout = "~/Views/Shared/_PDFLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Dashboard.cshtml";
+    }
+    int counter = 1;
+}
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>@ViewBag.ClassName</h4>
+    </div>
+    @if (ViewBag.IsPDF == false)
+    {
+        <div style="margin-top:5px;margin-bottom:5px;margin-left:5px;">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                if (ViewBag.IsHolidays)
+                {
+                    <input type="checkbox" name="isHolidays" id="isHolidays" checked="checked" />
+                }
+                else
+                {
+                    <input type="checkbox" name="isHolidays" id="isHolidays" />
+                }
+                <label>Show Holidays</label>
+                if (ViewBag.IsWeekHolidays)
+                {
+                    <input type="checkbox" name="isWeekHolidays" id="isWeekHolidays" checked="checked" />
+                }
+                else
+                {
+                    <input type="checkbox" name="isWeekHolidays" id="isWeekHolidays" />
+                }
+                <label>Show Weekly Holidays</label>
+                <input type="submit" class="btn btn-success" value="Refresh" />
+                @Html.ActionLink("Download as PDF", "ClassSchedulePDF", "CourseClasses", new { id = ViewBag.ID, isHolidays = ViewBag.IsHolidays, isWeekHolidays = ViewBag.IsWeekHolidays }, new { @class = "btn btn-success" })
+            }
+        </div>
+    }
+    <div class="panel-body" style="@(ViewBag.IsPDF == false ? "overflow:auto;height:300px;" : "")">
+
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Day
+                </th>
+                <th>
+                    Class Scheduled
+                </th>
+                <th>
+                    Holiday
+                </th>
+                @if (ViewBag.IsPDF == false)
+                {
+                    <th>Action</th>
+                }
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(counter++)</td>
+                    @if (ViewBag.ScrollTo == item.Date.ToShortDateString())
+                    {
+                        <td id="tdScrollTo">
+                            @(item.Date.ToString("dd/MM/yyyy"))
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @(item.Date.ToString("dd/MM/yyyy"))
+                        </td>
+                    }
+                    <td>
+                        @(item.Date.ToString("dddd"))
+                    </td>
+                    <td>
+                        @if (item.IsClass)
+                        {
+                            <label class="label label-success">Scheduled</label>
+                        }
+                        else
+                        {
+                            if (item.HolidayType == "Weekly")
+                            {
+                                <label class="label label-warning">Holiday</label>
+                            }
+                            else
+                            {
+                                <label class="label label-danger">Holiday</label>
+                            }
+                        }
+                    </td>
+                    @if (!item.IsClass)
+                    {
+                        <td>
+                            @item.HolidayType
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (ViewBag.IsPDF == false)
+                    {
+                        if (ELearning.Models.Utilities.GetInstance().GetCurrentUserRole() != "Management")
+                        {
+                            <td>
+                                @if (item.IsClass)
+                                {
+                                    @Html.ActionLink("Clear", "ScheduleClassDate", new { date = item.Date, id = ViewBag.ID, isHolidays = ViewBag.IsHolidays, isWeekHolidays = ViewBag.IsWeekHolidays })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Schedule", "ScheduleClassDate", new { date = item.Date, id = ViewBag.ID, isHolidays = ViewBag.IsHolidays, isWeekHolidays = ViewBag.IsWeekHolidays })
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            if ($("#tdScrollTo").get(0) != null)
+                $("#tdScrollTo").get(0).scrollIntoView();
+        });
+    </script>
+</div>
